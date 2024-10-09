@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="24.465441"
+   height="25.266766"
+   viewBox="0 0 24.465441 25.266766"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="chat_rotate.svg"
+   inkscape:version="1.3.2 (1:1.3.2+202311252150+091e20ef0f)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="5.7916667"
+     inkscape:cx="-1.6402878"
+     inkscape:cy="32.633093"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     d="M 0.98624705,12.86564 12.865641,0.98624581 c 0.637669,-0.6376689 1.625723,-0.6370184 2.192901,-0.069841 l 8.490506,8.49050689 c 0.567171,0.5671704 0.567807,1.5552103 -0.06986,2.1928793 L 13.685081,21.3939 c -0.476209,0.476208 -0.75087,1.117433 -0.767084,1.790691 -0.03438,1.425541 -1.759578,2.11596 -2.767913,1.107626 L 0.91640815,15.058541 c -0.5671774,-0.567177 -0.5678492,-1.555211 0.069841,-2.192901 z"
+     stroke="#ffffff"
+     id="path1" />
+</svg>
