@@ -11,3 +11,15 @@ export function setDarkTheme() {
         type: types.SET_DARK_THEME, payload: "dark"
     };
 }
+
+export function setHasAction(value) {
+    return {
+        type: types.SET_HAS_ACTION, payload: value
+    };
+}
+
+export function setHasClickedAction(value = true) {
+    return {
+        type: types.SET_HAS_CLICKED_ACTION, payload: value
+    };
+}

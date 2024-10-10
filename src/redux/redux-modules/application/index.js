@@ -2,6 +2,8 @@ import { types } from "./types";
 
 export const initialState = {
     theme: "light",
+    hasAction: false,
+    hasClickedAction: false,
 }
 
 export default (state = initialState, action = {}) => {
@@ -11,6 +13,18 @@ export default (state = initialState, action = {}) => {
             return {
                 ...state,
                 theme: action.payload,
+            };
+
+        case `${types.SET_HAS_ACTION}`:
+            return {
+                ...state,
+                hasAction: action.payload,
+            };
+
+        case `${types.SET_HAS_CLICKED_ACTION}`:
+            return {
+                ...state,
+                hasClickedAction: action.payload,
             };
 
         default:
