@@ -3,7 +3,9 @@ import { Container } from '../helper'
 
 function Chats() {
     return (
-        <Container>Chats</Container>
+        <Container>
+            Chats
+        </Container>
     )
 }
 

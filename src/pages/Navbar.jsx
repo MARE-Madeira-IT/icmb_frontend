@@ -36,6 +36,7 @@ const Menu = styled.div`
         width: 40px;
         height: 40px;
         border: 7px solid #fff;
+
         background-color: ${({ theme }) => theme.secundary}; 
         margin-bottom: 5px;
     }

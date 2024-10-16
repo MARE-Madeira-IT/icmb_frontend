@@ -11,6 +11,7 @@ function MessageBoard(props) {
     const [formValues, setFormValues] = useState();
 
     useEffect(() => {
+        props.setHasAction(true)
         if (props.hasClickedAction) {
             setVisible(true);
             props.setHasClickedAction(false);
@@ -68,6 +69,21 @@ function MessageBoard(props) {
                     <Input type="textarea" />
                 </Form.Item>
             </Modal>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum repellat quos veritatis rem. Cupiditate, quas assumenda totam deleniti laudantium tempora consequuntur suscipit placeat impedit corrupti fuga repudiandae corporis cum voluptate.</p>
+
         </Container>
     )
 }
