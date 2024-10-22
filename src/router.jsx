@@ -5,6 +5,8 @@ import Program from "./pages/Program";
 import Chats from "./pages/Chats";
 import Support from "./pages/Support";
 import MessageBoard from "./pages/MessageBoard";
+import Speakers from "./pages/Speakers";
+import Speaker from "./Speaker";
 
 export const router = createBrowserRouter([
     {
@@ -29,6 +31,14 @@ export const router = createBrowserRouter([
             {
                 path: "/message-board",
                 element: <MessageBoard />,
+            },
+            {
+                path: "/speakers",
+                element: <Speakers />,
+            },
+            {
+                path: "/speakers/:id",
+                element: <Speaker />,
             },
         ],
     },

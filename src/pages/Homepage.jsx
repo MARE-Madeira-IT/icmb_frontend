@@ -1,65 +1,10 @@
 import React from 'react'
-import { Container } from '../helper'
+import { Container, Content } from '../helper'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components';
 import { Col, Row } from 'antd';
+import Header from '../common/Header';
 
-const Header = styled.section`
-    height: 250px;
-    position: relative;
-    padding: 0px 20px;
-    box-sizing: border-box;
-
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background-color: white;
-        width: 100%;
-        height: 30px;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-    }
-
-    .background {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .logo {
-            width: 60px;
-        }
-
-        .back {
-            width: 40px;
-            height: 40px;
-        }
-
-        .profile {
-            width: 40px;
-            height: 40px;
-            border-radius: 40px;
-            object-fit: cover;
-        }
-    }
-`;
-
-const Content = styled.section`
-    padding: 0px 20px;
-    box-sizing: border-box;
-    margin-bottom: 50px;
-`;
 
 const NavItem = styled(Col)`
     width: 100%;
@@ -99,13 +44,15 @@ function Homepage() {
 
     return (
         <Container>
-            <Header>
+            <Header background="/images/header.jpg">
                 <div className='navbar'>
                     <img className='logo' src="/logo.png" alt="icmb logo" />
                     <img className='profile' src="/profile.jpg" alt=" profile pic" />
                 </div>
-                <img className='background' src="/images/header.jpg" alt="" />
             </Header>
+
+
+
             <Content>
                 <Row gutter={16}>
                     <NavItem background="/images/alert_board.jpg" span={24}>
@@ -151,7 +98,7 @@ function Homepage() {
                                 </Link>
                             </NavItem>
                             <NavItem background="/images/speakers.jpg" md={24} sm={24}>
-                                <Link to="/message-board">
+                                <Link to="/speakers">
                                     <h3>Keynote Speakers</h3>
                                     <p>Know the public speakers of ICMB</p>
                                 </Link>
