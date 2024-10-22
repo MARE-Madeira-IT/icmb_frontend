@@ -7,22 +7,28 @@ import { dark, light } from './theme'
 import { Outlet, useLocation } from 'react-router-dom'
 import { setHasAction } from './redux/redux-modules/application/actions'
 
-const actionRoutes = ["/message-board"];
-const actionImages = ["/public/icons/message_board.svg"];
+const actionRoutes = ["message-board", "speaker"];
+const actionImages = ["/public/icons/message_board.svg", "/public/icons/share.svg"];
 
 function Template(props) {
     const [currentActionImage, setCurrentActionImage] = useState("")
     let location = useLocation();
 
     useEffect(() => {
-        props.setHasAction(actionRoutes.includes(location.pathname))
-        let hasAction = actionRoutes.includes(location.pathname)
+        let pathname = getCurrentPathWithoutLastPart(location.pathname)
+        props.setHasAction(actionRoutes.includes(pathname))
+        let hasAction = actionRoutes.includes(pathname)
 
         if (hasAction) {
-            setCurrentActionImage(actionImages[actionRoutes.indexOf(location.pathname)])
+            setCurrentActionImage(actionImages[actionRoutes.indexOf(pathname)])
         }
 
     }, [location.key])
+
+    const getCurrentPathWithoutLastPart = (path) => {
+        let basename = path.split('/')
+        return basename[1]
+    }
 
     return (
         <ThemeProvider theme={props.theme === 'light' ? light : dark}>

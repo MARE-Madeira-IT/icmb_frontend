@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
                 element: <Speakers />,
             },
             {
-                path: "/speakers/:id",
+                path: "/speaker/:id",
                 element: <Speaker />,
             },
         ],

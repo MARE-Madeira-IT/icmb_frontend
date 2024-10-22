@@ -107,7 +107,7 @@ function Speakers() {
             <Content>
                 <SpeakerList>
                     {speakers.map((speaker, index) => (
-                        <Speaker to={"/speakers/" + index} iseven={index % 2 == 0} key={index}>
+                        <Speaker to={"/speaker/" + index} iseven={index % 2 == 0} key={index}>
                             <div className='content'>
                                 <img src="/icons/triangle.svg" alt="triangle" className="triangle" />
                                 <img src={"/icons/" + speaker.background + ".svg"} alt="asbtract elements" className="background" />
