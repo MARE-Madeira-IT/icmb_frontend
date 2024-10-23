@@ -98,12 +98,7 @@ function Speakers() {
     ]
     return (
         <Container>
-            <Header background="/images/speakers.jpg">
-                <div className='navbar'>
-                    <img className='back' src="/icons/back.svg" alt="icmb logo" />
-                    <img className='profile' src="/profile.jpg" alt="profile pic" />
-                </div>
-            </Header>
+            <Header hasback hasprofile background="/images/speakers.jpg" />
             <Content>
                 <SpeakerList>
                     {speakers.map((speaker, index) => (

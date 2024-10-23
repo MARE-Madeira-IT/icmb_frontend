@@ -9,6 +9,7 @@ const Container = styled.section`
     position: sticky;
     bottom: 0;
     left: 0;
+    z-index: 99;
 `;
 
 const Menu = styled.div`

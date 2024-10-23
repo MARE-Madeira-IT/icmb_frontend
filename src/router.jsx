@@ -6,8 +6,9 @@ import Chats from "./pages/Chats";
 import Support from "./pages/Support";
 import MessageBoard from "./pages/MessageBoard";
 import Speakers from "./pages/Speakers";
-import Speaker from "./Speaker";
+import Speaker from "./pages/Speaker";
 import Venue from "./pages/Venue";
+import Sponsors from "./pages/Sponsors";
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
             {
                 path: "/venue",
                 element: <Venue />,
+            },
+            {
+                path: "/sponsors",
+                element: <Sponsors />,
             },
         ],
     },

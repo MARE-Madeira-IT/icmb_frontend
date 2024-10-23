@@ -44,12 +44,7 @@ function Homepage() {
 
     return (
         <Container>
-            <Header background="/images/header.jpg">
-                <div className='navbar'>
-                    <img className='logo' src="/logo.png" alt="icmb logo" />
-                    <img className='profile' src="/profile.jpg" alt=" profile pic" />
-                </div>
-            </Header>
+            <Header haslogo hasprofile background="/images/header.jpg" />
 
 
 
@@ -92,7 +87,7 @@ function Homepage() {
                     <Col span={12}>
                         <Row gutter={16}>
                             <NavItem background="/images/sponsors.jpg" md={24} sm={24}>
-                                <Link to="/message-board">
+                                <Link to="/sponsors">
                                     <h3>Sponsors</h3>
                                     <p>Entities that support us</p>
                                 </Link>

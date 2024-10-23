@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.section`
@@ -54,12 +55,19 @@ const Container = styled.section`
     }
 `;
 
-function Header(props) {
+function Header({ children, background, haslogo, hasback, hasprofile, backroute = "/" }) {
     return (
         <Container>
-            {props.children}
+            <div className='navbar'>
+                {haslogo && <img className='logo' src="/logo.png" alt="icmb logo" />}
+                {hasback && <Link to={backroute}><img className='back' src="/icons/back.svg" alt="icmb logo" /></Link>}
+                {hasprofile && <img className='profile' src="/profile.jpg" alt="profile pic" />}
 
-            <img className='background' src={props.background} alt="" />
+            </div>
+
+            {children}
+
+            <img className='background' src={background} alt="" />
         </Container>
     )
 }

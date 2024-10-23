@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Container, Content } from './helper'
+import { Container, Content } from '../helper'
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { setHasAction, setHasClickedAction } from './redux/redux-modules/application/actions';
+import { setHasAction, setHasClickedAction } from '../redux/redux-modules/application/actions';
 import { Link } from 'react-router-dom';
 
 const Header = styled.section`
@@ -150,6 +150,7 @@ function Speaker(props) {
                     <img className='back' src="/icons/back.svg" alt="icmb logo" />
                 </Link>
             </Header>
+
             <Content>
                 <Info>
                     <h3>{data.name}</h3>

@@ -207,11 +207,8 @@ function Venue() {
 
     return (
         <Container>
-            <Header background="/images/madeira.jpg">
-                <div className='navbar'>
-                    <img className='back' src="/icons/back.svg" alt="icmb logo" />
-                    <img className='profile' src="/profile.jpg" alt="profile pic" />
-                </div>
+            <Header hasback hasprofile background="/images/madeira.jpg">
+
                 <HeaderContent>
                     <div>
                         <h2>Madeira Island</h2>
