@@ -10,6 +10,8 @@ import Speaker from "./pages/Speaker";
 import Venue from "./pages/Venue";
 import Sponsors from "./pages/Sponsors";
 import Resources from "./pages/Resources";
+import Voting from "./pages/Voting";
+import PosterForm from "./pages/PosterForm";
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +56,14 @@ export const router = createBrowserRouter([
             {
                 path: "/resources",
                 element: <Resources />,
+            },
+            {
+                path: "/voting",
+                element: <Voting />,
+            },
+            {
+                path: "/poster-voting",
+                element: <PosterForm />,
             },
         ],
     },

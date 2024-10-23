@@ -73,7 +73,7 @@ function Homepage() {
                         </Row>
                     </Col>
                     <NavItem background="/images/community_vote.jpg" height={320} span={12} >
-                        <Link to="/message-board">
+                        <Link to="/voting">
                             <h3>Community Vote</h3>
                             <p>Evaluate posters and sessions</p>
                         </Link>
