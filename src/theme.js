@@ -6,7 +6,8 @@ export const light = {
     primary: "#396eaebf",
     secundary: "#81bede",
     darkGradient: "#396EAE",
-    lightGradient: "#75AAE9"
+    lightGradient: "#75AAE9",
+    light: "#ECF7FF"
 }
 
 export const dark = {
@@ -17,5 +18,6 @@ export const dark = {
     primary: "#396eaebf",
     secundary: "#81bede",
     darkGradient: "#396EAE",
-    lightGradient: "#75AAE9"
+    lightGradient: "#75AAE9",
+    light: "#ECF7FF"
 }

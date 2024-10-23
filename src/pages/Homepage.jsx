@@ -101,7 +101,7 @@ function Homepage() {
                         </Row>
                     </Col>
                     <NavItem background="/images/resources_media.jpg" span={24}>
-                        <Link to="/message-board">
+                        <Link to="/resources">
                             <h3>Resources & Media</h3>
                             <p>Access to the digital content in the conference </p>
                         </Link>

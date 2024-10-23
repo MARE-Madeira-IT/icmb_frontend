@@ -9,6 +9,7 @@ import Speakers from "./pages/Speakers";
 import Speaker from "./pages/Speaker";
 import Venue from "./pages/Venue";
 import Sponsors from "./pages/Sponsors";
+import Resources from "./pages/Resources";
 
 export const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
             {
                 path: "/sponsors",
                 element: <Sponsors />,
+            },
+            {
+                path: "/resources",
+                element: <Resources />,
             },
         ],
     },
