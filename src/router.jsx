@@ -7,6 +7,7 @@ import Support from "./pages/Support";
 import MessageBoard from "./pages/MessageBoard";
 import Speakers from "./pages/Speakers";
 import Speaker from "./Speaker";
+import Venue from "./pages/Venue";
 
 export const router = createBrowserRouter([
     {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
             {
                 path: "/speaker/:id",
                 element: <Speaker />,
+            },
+            {
+                path: "/venue",
+                element: <Venue />,
             },
         ],
     },

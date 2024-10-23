@@ -84,7 +84,7 @@ function Homepage() {
                         </Link>
                     </NavItem>
                     <NavItem background="/images/venue.jpg" height={320} span={12} >
-                        <Link to="/message-board">
+                        <Link to="/venue">
                             <h3>Venue</h3>
                             <p>Get to know Madeira Island</p>
                         </Link>
