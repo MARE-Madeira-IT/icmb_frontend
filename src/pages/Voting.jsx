@@ -22,20 +22,19 @@ function Voting() {
     };
 
     return (
-        <Container>
-            <QrReader
-                className="teste"
-                delay={1000}
-                style={{
-                    height: "100vh",
-                    width: "100vw",
-                    objectFit: "cover"
-                }}
-                facingMode="rear"
-                onError={onScanFail}
-                onScan={onScanSuccess}
-            />
-        </Container>
+
+        <QrReader
+            className="teste"
+            delay={1000}
+            style={{
+                height: "100vh",
+                width: "100vw",
+                objectFit: "cover"
+            }}
+            facingMode="rear"
+            onError={onScanFail}
+            onScan={onScanSuccess}
+        />
     )
 }
 

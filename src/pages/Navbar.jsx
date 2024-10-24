@@ -23,7 +23,7 @@ const Menu = styled.div`
     background-color: #396eaebf;
     backdrop-filter: blur(3px);
     /* top left, middle left, middle, middle right, top right, bottom right, bottom left */
-    /* clip-path: ${props => props.hasAction ? actionButtonClip : "none"};    */
+    /* clip-path: ${props => props.hasaction ? actionButtonClip : "none"};    */
 
     .active::before {
         content: "";
@@ -110,7 +110,7 @@ function Navbar(props) {
     return (
         <Container>
 
-            <Menu hasAction={props.hasAction}>
+            <Menu hasaction={props.hasAction}>
                 {props.hasAction && <Action onClick={() => props.setHasClickedAction()}>
                     <img src={props.currentActionImage} alt="action image" />
                 </Action>

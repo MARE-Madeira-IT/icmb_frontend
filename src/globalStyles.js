@@ -7,5 +7,10 @@ export const GlobalStyles = createGlobalStyle`
         padding: 0;
         margin: 0;
         transition: all 0.3s ease;
+        font-family: "Open Sans", sans-serif;
     }  
+
+    * {
+        scroll-behavior: smooth;
+    }
 `
