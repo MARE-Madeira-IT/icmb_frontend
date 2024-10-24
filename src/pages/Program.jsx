@@ -268,7 +268,6 @@ function Program() {
     const [currentFilter, setCurrentFilter] = useState(0)
 
     useEffect(() => {
-
         const onScroll = e => {
             filters.forEach(filter => {
                 if (elementInViewport(document.getElementById(filter))) {
@@ -279,6 +278,9 @@ function Program() {
 
         window.addEventListener('scroll', onScroll);
 
+        return () => {
+            window.removeEventListener("scroll", onScroll);
+        };
 
     }, [])
 
