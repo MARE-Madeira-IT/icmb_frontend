@@ -51,7 +51,7 @@ function Homepage() {
             <Content>
                 <Row gutter={16}>
                     <NavItem background="/images/alert_board.jpg" span={24}>
-                        <Link to="/message-board">
+                        <Link to="/alert-board">
                             <h3>Alert board</h3>
                             <p>Conference alerts & notifications</p>
                         </Link>
@@ -59,7 +59,7 @@ function Homepage() {
                     <Col span={12}>
                         <Row gutter={16}>
                             <NavItem background="/images/networking_room.jpg" md={24} sm={24}>
-                                <Link to="/message-board">
+                                <Link to="/networking-room">
                                     <h3>Networking Room</h3>
                                     <p>Connect at ICMB</p>
                                 </Link>

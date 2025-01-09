@@ -12,6 +12,8 @@ import Sponsors from "./pages/Sponsors";
 import Resources from "./pages/Resources";
 import Voting from "./pages/Voting";
 import PosterForm from "./pages/PosterForm";
+import NetworkingRoom from "./pages/NetworkingRoom";
+import AlertBoard from "./pages/AlertBoard";
 
 export const router = createBrowserRouter([
     {
@@ -64,6 +66,14 @@ export const router = createBrowserRouter([
             {
                 path: "/poster-voting",
                 element: <PosterForm />,
+            },
+            {
+                path: "/networking-room",
+                element: <NetworkingRoom />,
+            },
+            {
+                path: "/alert-board",
+                element: <AlertBoard />,
             },
         ],
     },

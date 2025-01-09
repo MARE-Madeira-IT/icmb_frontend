@@ -7,8 +7,8 @@ import { dark, light } from './theme'
 import { Outlet, useLocation } from 'react-router-dom'
 import { setHasAction } from './redux/redux-modules/application/actions'
 
-const actionRoutes = ["message-board", "speaker", "poster-voting"];
-const actionImages = ["/public/icons/message_board.svg", "/public/icons/share.svg", "/public/icons/submit.svg"];
+const actionRoutes = ["message-board", "speaker", "poster-voting", "networking-room"];
+const actionImages = ["/public/icons/message_board.svg", "/public/icons/45connect.svg", "/public/icons/submit.svg", "/public/icons/share.svg"];
 
 function Template(props) {
     const [currentActionImage, setCurrentActionImage] = useState("")
