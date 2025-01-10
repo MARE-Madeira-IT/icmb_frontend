@@ -14,6 +14,8 @@ import Voting from "./pages/Voting";
 import PosterForm from "./pages/PosterForm";
 import NetworkingRoom from "./pages/NetworkingRoom";
 import AlertBoard from "./pages/AlertBoard";
+import Chat from "./pages/Chat";
+import Login from "./pages/Login";
 
 export const router = createBrowserRouter([
     {
@@ -24,12 +26,20 @@ export const router = createBrowserRouter([
                 element: <Homepage />,
             },
             {
+                path: "/login",
+                element: <Login />,
+            },
+            {
                 path: "/program",
                 element: <Program />,
             },
             {
                 path: "/chats",
                 element: <Chats />,
+            },
+            {
+                path: "/chats/:id",
+                element: <Chat />,
             },
             {
                 path: "/support",

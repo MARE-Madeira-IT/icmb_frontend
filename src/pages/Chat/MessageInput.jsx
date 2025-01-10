@@ -10,7 +10,7 @@ const MessageInput = (props) => {
             alert("Please enter a message!");
             return;
         }
-        props.createMessage({ content: message, user_id: 1, chat_id: 1 });
+        props.createMessage({ content: message, user_id: props.user.id, chat_id: props.chat_id });
 
         setMessage("");
     };
