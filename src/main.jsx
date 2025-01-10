@@ -24,7 +24,7 @@ import { jwtDecode } from 'jwt-decode'
 //     },
 // };
 window.Pusher = Pusher;
-
+Pusher.logToConsole = true;
 
 
 
