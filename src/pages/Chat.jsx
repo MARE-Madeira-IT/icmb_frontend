@@ -1,15 +1,44 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Container } from "../helper";
+import { Container, Content } from "../helper";
 import Message from "./Chat/Message";
 import MessageInput from "./Chat/MessageInput";
 import Echo from "laravel-echo";
 import { connect } from "react-redux";
 import {
+    addMessage,
     createMessage,
     fetchMessages,
+    markAsRead,
 } from "../redux/redux-modules/message/actions";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { fetchChat } from "../redux/redux-modules/chat/actions";
+import Header from "../common/Header";
+import styled from "styled-components";
+import dayjs from "dayjs";
+import Pusher from "pusher-js";
+
+const MessageContainer = styled.div`
+    h4 {
+        text-align: center;
+        font-weight: normal;
+        opacity: 0.8;
+        font-size: 12px;
+    }
+`;
+
+const currentEcho = new Echo({
+    broadcaster: "pusher",
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: "eu",
+    encrypted: true,
+    authEndpoint: import.meta.env.VITE_API_URL + "/broadcasting/auth",
+    auth: {
+        headers: {
+            Authorization: `Bearer ` + localStorage.token,
+            Accept: 'application/json',
+        },
+    },
+});
 
 function Chat(props) {
     // const [currentEcho, setCurrentEcho] = useState(new Echo(options))
@@ -17,9 +46,10 @@ function Chat(props) {
     const webSocketChannel = `chats.${props.currentChat.socket}`;
     const { messages, loading } = props;
     const scroll = useRef();
+    const [hasSetMessage, setHasSetMessage] = useState(false)
     const [allMessages, setAllMessages] = useState([]);
-    const [currentEcho, setCurrentEcho] = useState(undefined);
     const { id } = useParams();
+    let location = useLocation();
 
     const scrollToBottom = () => {
         scroll.current.scrollIntoView({ behavior: "smooth" });
@@ -31,75 +61,88 @@ function Chat(props) {
     };
 
     useEffect(() => {
+        if (!hasSetMessage) {
+            setAllMessages([...allMessages, ...messages]);
+            setHasSetMessage(true);
+        }
+    }, [messages])
+
+
+    useEffect(() => {
         getMessages();
     }, []);
 
     useEffect(() => {
-        if (currentEcho) {
-            currentEcho
-                .private(webSocketChannel)
-                .listen("MessageCreated", async (e) => {
-                    console.log(e.message);
-                    setAllMessages([...allMessages, e.message]);
-                    await getMessages();
-                });
+        currentEcho
+            .private(webSocketChannel)
+            .listen("MessageCreated", async (e) => {
+                if (e.message.user.id != props.currentUser.id) {
+                    console.log(e, "socket message")
+                    props.addMessage(e);
 
-            return () => {
-                currentEcho.leave(webSocketChannel);
-            };
-        }
-    }, [currentEcho]);
+                }
 
-    useEffect(() => {
-        if (props.currentChat.id) {
-            console.log(props.currentChat);
-            var cEcho = new Echo({
-                broadcaster: "pusher",
-                key: import.meta.env.VITE_PUSHER_APP_KEY,
-                cluster: "eu",
-                encrypted: true,
-                authEndpoint: import.meta.env.VITE_API_URL + "/broadcasting/auth", // As I'm using JWT tokens, I need to manually set up the headers.
-                auth: {
-                    headers: {
-                        Authorization: `Bearer ` + localStorage.token,
-                        Accept: 'application/json',
-                    },
-                },
+                scrollToBottom();
             });
 
-            setCurrentEcho(cEcho);
+
+        return () => {
+            currentEcho.leave(webSocketChannel);
         }
-    }, [props.currentChat]);
+    }, [])
+
+
+
 
     useEffect(() => {
         props.fetchChat(id);
     }, []);
 
+    useEffect(() => {
+        props.markAsRead({ chat_id: id })
+    }, [location]);
+
+    // useEffect(() => {
+    //     function beforeUnload(e) {
+    //         // e.preventDefault();
+    //         // console.log(e, "teste")
+    //         props.markAsRead({ chat_id: id });
+    //     }
+
+    //     window.addEventListener('beforeunload', beforeUnload);
+
+    //     return () => {
+    //         window.removeEventListener('beforeunload', beforeUnload);
+    //     };
+    // }, []);
+
     return (
         <Container>
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Chat Box</div>
-                        <div
-                            className="card-body"
-                            style={{ height: "500px", overflowY: "auto" }}
-                        >
-                            {[...messages, ...allMessages]?.map((message) => (
-                                <Message key={message.id} userId={1} message={message} />
-                            ))}
-                            <span ref={scroll}></span>
-                        </div>
-                        <div className="card-footer">
-                            <MessageInput
-                                user={props.currentUser}
-                                chat_id={id}
-                                createMessage={props.createMessage}
-                            />
-                        </div>
+            <Header height="150px" hasback hasprofile background="/images/resources_media.jpg" />
+            <Content style={{ height: "calc(100vh - 285px)" }}>
+
+                <div>
+                    <div style={{ height: "calc(100vh - 350px)", overflowY: "auto" }}>
+                        {messages.map((dates) => (
+                            <MessageContainer key={dates.date}>
+                                <h4>{dayjs(dates.date).format("dddd, MMM D")}</h4>
+                                {dates.messages.map((message) => (
+                                    <Message key={message.id} self={message.user.id == props.currentUser.id} message={message} />
+                                ))}
+                                <div ref={scroll}>scroll aqui</div>
+
+                            </MessageContainer>
+                        ))}
+                        <span ref={scroll}></span>
                     </div>
+
+                    <MessageInput
+                        user={props.currentUser}
+                        chat_id={id}
+                        createMessage={props.createMessage}
+                    />
                 </div>
-            </div>
+            </Content>
         </Container>
     );
 }
@@ -107,8 +150,10 @@ function Chat(props) {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchMessages: (page, filters) => dispatch(fetchMessages(page, filters)),
+        markAsRead: (filters) => dispatch(markAsRead(filters)),
         fetchChat: (id) => dispatch(fetchChat(id)),
         createMessage: (data) => dispatch(createMessage(data)),
+        addMessage: (record) => dispatch(addMessage(record)),
     };
 };
 

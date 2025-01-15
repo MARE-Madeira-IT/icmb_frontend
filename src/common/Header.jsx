@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.section`
-    height: 250px;
+    height: ${props => props.height};
     position: relative;
     padding: 0px 20px;
     box-sizing: border-box;
@@ -55,9 +55,9 @@ const Container = styled.section`
     }
 `;
 
-function Header({ children, background, haslogo, hasback, hasprofile, backroute = "/" }) {
+function Header({ children, background, haslogo, hasback, hasprofile, backroute = "/", height = "250px" }) {
     return (
-        <Container>
+        <Container height={height}>
             <div className='navbar'>
                 {haslogo && <img className='logo' src="/logo.png" alt="icmb logo" />}
                 {hasback && <Link to={backroute}><img className='back' src="/icons/back.svg" alt="icmb logo" /></Link>}

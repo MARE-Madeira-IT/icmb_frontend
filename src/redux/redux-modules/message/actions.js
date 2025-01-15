@@ -26,10 +26,20 @@ export const createMessage = (data) => ({
     payload: axios.post(`${import.meta.env.VITE_API_URL}/api/messages`, data),
 });
 
+export const addMessage = (data) => ({
+    type: types.ADD_MESSAGE,
+    payload: data,
+});
+
 
 export const updateMessage = (id, data) => ({
     type: types.UPDATE_MESSAGE,
     payload: axios.put(`${import.meta.env.VITE_API_URL}/api/messages/${id}`, data),
 });
 
+
+export const markAsRead = (data) => ({
+    type: types.MARK_AS_READ,
+    payload: axios.put(`${import.meta.env.VITE_API_URL}/api/mark-as-read/`, data),
+});
 

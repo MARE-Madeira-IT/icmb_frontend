@@ -10,7 +10,7 @@ export const dimensions = {
 };
 
 export const Container = styled.section`
-    min-height: 100vh;
+    /* min-height: 100vh; */
     width: 100%;
 `;
 

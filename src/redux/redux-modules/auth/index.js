@@ -42,7 +42,7 @@ export default (state = initialState, action = {}) => {
                 ...state,
                 loading: false,
                 isAuthenticated: true,
-                user: action.payload,
+                user: action.payload.data.user,
             };
 
         case `${types.LOGOUT}_FULFILLED`:
