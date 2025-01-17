@@ -8,7 +8,7 @@ const Container = styled.div`
     padding: 5px;
     box-sizing: border-box;
     border-radius: 6px;
-    margin-top: 30px;
+    margin-top: 20px;
     
     input {
         border: 0px;

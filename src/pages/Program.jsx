@@ -3,6 +3,8 @@ import { Container, Content } from '../helper'
 import Header from '../common/Header'
 import styled from 'styled-components';
 import dayjs from "dayjs";
+import { fetchCalendars } from '../redux/redux-modules/calendar/actions';
+import { connect } from 'react-redux';
 
 const HeaderContent = styled.div`
     height: calc(100% - 60px);
@@ -85,8 +87,6 @@ const Section = styled.div`
         box-sizing: border-box;
         display: flex;
         align-items: center;
-
-        
         border-top: 1px solid #E1E1E1;
         border-bottom: 1px solid #E1E1E1;
 
@@ -94,6 +94,7 @@ const Section = styled.div`
             padding: 0px 20px;
             box-sizing: border-box;
             border-right: 1px solid #E1E1E1;
+            opacity: .8;
 
             p {
                 margin: 0px;
@@ -107,7 +108,7 @@ const Section = styled.div`
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 100%;
+            flex: 1;
 
             button {
                 cursor: pointer;
@@ -136,133 +137,9 @@ const Section = styled.div`
     }
 `;
 
-const data = [
-    {
-        date: "2025-10-07",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Registration desk",
-        room: "Entryway",
-        my_schedule: 1,
-        scroll_id: "2025-10-07"
-    },
-    {
-        date: "2025-10-07",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 1,
-    },
-    {
-        date: "2025-10-07",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-07",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-08",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 1,
-        scroll_id: "2025-10-08"
-    },
-    {
-        date: "2025-10-08",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-08",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-08",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-08",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-09",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-        scroll_id: "2025-10-09"
-    },
-    {
-        date: "2025-10-09",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-09",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-09",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-09",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    },
-    {
-        date: "2025-10-09",
-        from: "09:00AM",
-        to: "09:30AM",
-        title: "Opening remarks",
-        room: "Room 1",
-        my_schedule: 0,
-    }
-]
 
-function Program() {
+function Program(props) {
+    const { data } = props;
     const [myProgram, setMyProgram] = useState(0)
     const [filters, setFilters] = useState(["2025-10-07", "2025-10-08", "2025-10-09"])
     const [currentFilter, setCurrentFilter] = useState(0)
@@ -283,6 +160,19 @@ function Program() {
         };
 
     }, [])
+
+    useEffect(() => {
+        props.fetchCalendars()
+
+    }, [])
+
+    useEffect(() => {
+        Object.entries(data).map((section, index) => {
+            console.log(section)
+        });
+    }, [data])
+
+
 
 
     const elementInViewport = (el) => {
@@ -312,6 +202,28 @@ function Program() {
 
     }
 
+    const CalendarEntry = ({ entry }) => (
+        <Section onScroll={(e) => handleScroll(e, entry.from)} id={entry.from}>
+            <div className="content">
+                <div className='datetime'>
+                    <p>{dayjs(entry.date).format('MMM DD')}</p>
+                    <p>{dayjs(entry.from).format('H:mm A')}</p>
+                    <p>{dayjs(entry.to).format('H:mm A')}</p>
+                </div>
+                <div className='info'>
+                    <div className='title'>
+                        <h3>{entry.title}</h3>
+                        <p>{entry.room}</p>
+                    </div>
+                    <button>
+                        <img src={entry.my_schedule ? "/icons/program_schedule.svg" : "/icons/program_add.svg"} alt="" />
+                    </button>
+                </div>
+
+            </div>
+        </Section>
+    )
+
 
 
     return (
@@ -339,32 +251,23 @@ function Program() {
                 <SectionContainer>
 
 
-
-                    {data.map((section, index) => (
+                    {Object.entries(data).map((section, index) => (
                         <div key={"section_" + index}>
-                            {(myProgram == 0 || section.my_schedule == 1) &&
-                                <Section onScroll={(e) => handleScroll(e, section.scroll_id)} id={section.scroll_id}>
-                                    {section.scroll_id && <h3>{section.scroll_id}</h3>}
-                                    {/* <p>{section.from}</p> */}
-
-                                    <div className="content">
-                                        <div className='datetime'>
-                                            <p>{dayjs(section.date).format('MMM DD')}</p>
-                                            <p>{section.from}</p>
-                                            <p>{section.to}</p>
-                                        </div>
-                                        <div className='info'>
-                                            <div className='title'>
-                                                <h3>{section.title}</h3>
-                                                <p>{section.room}</p>
+                            {filters[currentFilter] == dayjs(section[0]).format("YYYY-MM-DD") &&
+                                <div>
+                                    {myProgram == 0 && <h4 style={{ fontWeight: "400" }}>{dayjs(section[0]).format('HH:mm A')}</h4>}
+                                    {(myProgram == 1 && section[1].some((centry) => centry.my_schedule == 1)) && <h4 style={{ fontWeight: "400" }}>{dayjs(section[0]).format('HH:mm A')}</h4>}
+                                    {
+                                        section[1].map((entry, i) => (
+                                            <div key={entry.id}>
+                                                {myProgram == 0 ?
+                                                    <CalendarEntry entry={entry} />
+                                                    : (myProgram == 1 && entry.my_schedule) &&
+                                                    <CalendarEntry entry={entry} />
+                                                }
                                             </div>
-                                            <button>
-                                                <img src={section.my_schedule ? "/icons/program_schedule.svg" : "/icons/program_add.svg"} alt="" />
-                                            </button>
-                                        </div>
-
-                                    </div>
-                                </Section>
+                                        ))}
+                                </div>
                             }
                         </div >
                     ))}
@@ -374,4 +277,43 @@ function Program() {
     )
 }
 
-export default Program
+// {(myProgram == 0 || section.my_schedule == 1) &&
+//     <Section onScroll={(e) => handleScroll(e, section.scroll_id)} id={section.scroll_id}>
+//         {section.scroll_id && <h3>{section.scroll_id}</h3>}
+//         {/* <p>{section.from}</p> */}
+
+//         <div className="content">
+//             <div className='datetime'>
+//                 <p>{dayjs(section[0]).format('MMM DD')}</p>
+//                 <p>{section.from}</p>
+//                 <p>{section.to}</p>
+//             </div>
+//             <div className='info'>
+//                 <div className='title'>
+//                     <h3>{section.title}</h3>
+//                     <p>{section.room}</p>
+//                 </div>
+//                 <button>
+//                     <img src={section.my_schedule ? "/icons/program_schedule.svg" : "/icons/program_add.svg"} alt="" />
+//                 </button>
+//             </div>
+
+//         </div>
+//     </Section>
+// }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchCalendars: (filters) => dispatch(fetchCalendars(filters)),
+    };
+};
+
+const mapStateToProps = (state) => {
+    return {
+
+        data: state.calendar.data,
+        loading: state.calendar.loading,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Program);

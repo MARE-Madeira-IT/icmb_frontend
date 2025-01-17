@@ -26,23 +26,8 @@ const MessageContainer = styled.div`
     }
 `;
 
-const currentEcho = new Echo({
-    broadcaster: "pusher",
-    key: import.meta.env.VITE_PUSHER_APP_KEY,
-    cluster: "eu",
-    encrypted: true,
-    authEndpoint: import.meta.env.VITE_API_URL + "/broadcasting/auth",
-    auth: {
-        headers: {
-            Authorization: `Bearer ` + localStorage.token,
-            Accept: 'application/json',
-        },
-    },
-});
 
 function Chat(props) {
-    // const [currentEcho, setCurrentEcho] = useState(new Echo(options))
-    // const webSocketChannel = `chat`;
     const webSocketChannel = `chats.${props.currentChat.socket}`;
     const { messages, loading } = props;
     const scroll = useRef();
@@ -51,14 +36,15 @@ function Chat(props) {
     const { id } = useParams();
     let location = useLocation();
 
-    const scrollToBottom = () => {
-        scroll.current.scrollIntoView({ behavior: "smooth" });
-    };
-
     const getMessages = async () => {
         props.fetchMessages(1, { chat_id: id });
-        setTimeout(scrollToBottom, 0);
     };
+
+    useEffect(() => {
+        if (messages.length && scroll.current) {
+            scroll.current.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" });
+        }
+    }, [messages])
 
     useEffect(() => {
         if (!hasSetMessage) {
@@ -67,32 +53,25 @@ function Chat(props) {
         }
     }, [messages])
 
-
     useEffect(() => {
         getMessages();
     }, []);
 
     useEffect(() => {
-        currentEcho
-            .private(webSocketChannel)
-            .listen("MessageCreated", async (e) => {
-                if (e.message.user.id != props.currentUser.id) {
-                    console.log(e, "socket message")
-                    props.addMessage(e);
-
-                }
-
-                scrollToBottom();
-            });
-
+        if (props.currentChat.id) {
+            window.Echo
+                .private(webSocketChannel)
+                .listen("MessageCreated", async (e) => {
+                    if (e.message.user.id != props.currentUser.id) {
+                        props.addMessage(e);
+                    }
+                });
+        }
 
         return () => {
-            currentEcho.leave(webSocketChannel);
+            window.Echo.leave(webSocketChannel);
         }
-    }, [])
-
-
-
+    }, [props.currentChat.id]);
 
     useEffect(() => {
         props.fetchChat(id);
@@ -101,20 +80,6 @@ function Chat(props) {
     useEffect(() => {
         props.markAsRead({ chat_id: id })
     }, [location]);
-
-    // useEffect(() => {
-    //     function beforeUnload(e) {
-    //         // e.preventDefault();
-    //         // console.log(e, "teste")
-    //         props.markAsRead({ chat_id: id });
-    //     }
-
-    //     window.addEventListener('beforeunload', beforeUnload);
-
-    //     return () => {
-    //         window.removeEventListener('beforeunload', beforeUnload);
-    //     };
-    // }, []);
 
     return (
         <Container>
@@ -129,11 +94,12 @@ function Chat(props) {
                                 {dates.messages.map((message) => (
                                     <Message key={message.id} self={message.user.id == props.currentUser.id} message={message} />
                                 ))}
-                                <div ref={scroll}>scroll aqui</div>
+                                <div ref={scroll} />
 
                             </MessageContainer>
                         ))}
-                        <span ref={scroll}></span>
+                        <br />
+                        <div ref={scroll} />
                     </div>
 
                     <MessageInput
