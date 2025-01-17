@@ -15,7 +15,7 @@ export default (state = initialState, action = {}) => {
         case `${types.UPDATE_CALENDAR}_PENDING`:
         case `${types.FETCH_CALENDARS}_PENDING`:
         case `${types.FETCH_CALENDAR}_PENDING`:
-        case `${types.ADD_TO_CALENDAR}_PENDING`:
+        case `${types.UPDATE_SELF_CALENDAR}_PENDING`:
             return {
                 ...state,
                 loading: true,
@@ -24,25 +24,30 @@ export default (state = initialState, action = {}) => {
         case `${types.UPDATE_CALENDAR}_REJECTED`:
         case `${types.DELETE_CALENDAR}_REJECTED`:
         case `${types.CREATE_CALENDAR}_REJECTED`:
-        case `${types.ADD_TO_CALENDAR}_REJECTED`:
+        case `${types.UPDATE_SELF_CALENDAR}_REJECTED`:
             return {
                 ...state,
                 loading: false,
             };
 
 
-        case `${types.ADD_TO_CALENDAR}_FULFILLED`:
+        case `${types.UPDATE_SELF_CALENDAR}_FULFILLED`: {
+            var currentCalendar = { ...state.data };
+            var newRecord = action.payload.data.data;
+            var array = currentCalendar[newRecord.from]
+
+            for (let index = 0; index < array.length; index++) {
+                if (array[index].id === newRecord.id) {
+                    array[index] = newRecord;
+                    break;
+                }
+            }
             return {
                 ...state,
                 loading: false,
-                data: state.data.map(
-                    (record) =>
-                        record.id === action.payload.data.data.id
-                            ? action.payload.data.data
-                            : record
-                )
+                data: currentCalendar
             };
-
+        }
         case `${types.CREATE_CALENDAR}_FULFILLED`:
             return {
                 ...state,

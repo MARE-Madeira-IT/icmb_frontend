@@ -26,9 +26,9 @@ export const createCalendar = (data) => ({
     payload: axios.post(`${import.meta.env.VITE_API_URL}/api/calendars`, data),
 });
 
-export const addToCalendar = (id) => ({
-    type: types.ADD_TO_CALENDAR,
-    payload: axios.post(`${import.meta.env.VITE_API_URL}/api/add-to-calendar/${id}`),
+export const updateSelfCalendar = (id) => ({
+    type: types.UPDATE_SELF_CALENDAR,
+    payload: axios.post(`${import.meta.env.VITE_API_URL}/api/update-calendar/${id}`),
 });
 
 export const updateCalendar = (id, data) => ({
