@@ -13,9 +13,11 @@ import {
   setAuthorizationToken,
 } from "./redux/redux-modules/auth/actions.js";
 import { jwtDecode } from "jwt-decode";
-
+import axios from "axios";
 window.Pusher = Pusher;
 Pusher.logToConsole = true;
+
+axios.defaults.headers.common["ngrok-skip-browser-warning"] = 69420;
 
 if (localStorage.token) {
   const token = jwtDecode(localStorage.token);

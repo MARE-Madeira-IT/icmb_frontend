@@ -76,6 +76,11 @@ export function resetToken() {
     setAuthorizationToken(false);
 }
 
+export const updateUser = (data) => ({
+    type: types.UPDATE_USER,
+    payload: axios.post(`${import.meta.env.VITE_API_URL}/api/users`, data),
+});
+
 // export const updateProfilePicture = (id, data) => ({
 //     type: types.UPDATE_PROFILE_PICTURE,
 //     payload: api.updateProfilePicture(id, data),

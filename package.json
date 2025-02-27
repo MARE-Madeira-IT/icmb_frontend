@@ -5,12 +5,14 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "host": "vite --host",
         "build": "vite build",
         "lint": "eslint .",
         "preview": "vite preview"
     },
     "dependencies": {
         "antd": "^5.21.3",
+        "antd-img-crop": "^4.24.0",
         "axios": "^1.7.9",
         "dayjs": "^1.11.13",
         "jwt-decode": "^4.0.0",
