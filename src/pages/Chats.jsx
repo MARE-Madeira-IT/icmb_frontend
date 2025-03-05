@@ -99,7 +99,7 @@ function Chats(props) {
               className="card-body"
               style={{ height: "500px", overflowY: "auto" }}
             >
-              {props.chats?.map((chat) => (
+              {props?.chats?.map((chat) => (
                 <Link
                   style={{ textDecoration: "none" }}
                   to={"/chats/" + chat.id}
@@ -112,11 +112,11 @@ function Chats(props) {
                     <div className="content">
                       <div className="info">
                         <h3>{chat?.recipient?.name}</h3>
-                        <p>{chat.message.content}</p>
+                        <p>{chat?.message?.content}</p>
                       </div>
                       <div className="details">
                         <p className="date">
-                          {dayjs(chat.message.created_at).fromNow()}
+                          {dayjs(chat?.message?.created_at).fromNow()}
                         </p>
                         {chat.unread_messages ? (
                           <p className="notification">{chat.unread_messages}</p>
