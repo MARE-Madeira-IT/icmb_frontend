@@ -1,100 +1,121 @@
-import React from 'react'
-import { Container, Content } from '../helper'
-import Header from '../common/Header'
-import styled from 'styled-components';
-
-const data = {
-    title: "Thank you to our sponsors",
-    description: "We're excited to bring you an incredible conference, made possible by the generous support of our sponsors.",
-    sections: [
-        {
-            title: "Organization",
-            sponsors: [
-                { logo: "mare" }, { logo: "ssmb" }
-            ]
-        },
-
-        {
-            title: "Local sponsors",
-            sponsors: [
-                { logo: "mare" }, { logo: "ssmb" }, { logo: "mare" }, { logo: "ssmb" }, { logo: "mare" }, { logo: "ssmb" }
-            ]
-        }
-    ]
-}
+import React, { useEffect } from "react";
+import { Container, Content } from "../helper";
+import Header from "../common/Header";
+import styled from "styled-components";
+import { fetchSponsors } from "../redux/redux-modules/sponsor/actions";
+import { connect } from "react-redux";
 
 const Section = styled.div`
+  h4 {
+    text-transform: capitalize;
+  }
 
-    .sponsors {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
+  .sponsors {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
+    .sponsor {
+      flex-basis: calc(50% - 10px);
+      background-color: ${({ theme }) => theme.primary};
+      background: ${({ theme }) =>
+        "radial-gradient(circle, " +
+        theme.lightGradient +
+        " 0%," +
+        theme.darkGradient +
+        " 100%)"};
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 20px 0px;
+      margin-bottom: 20px;
 
-        .sponsor {
-            flex-basis: calc(50% - 10px);
-            background-color: ${({ theme }) => theme.primary};
-            background: ${({ theme }) => "radial-gradient(circle, " + theme.lightGradient + " 0%," + theme.darkGradient + " 100%)"};
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 20px 0px;
-            margin-bottom: 20px;
+      .main {
+        z-index: 2;
+        width: 70%;
+      }
 
-            .main {
-                z-index: 2;
-                width: 70%;
-            }
+      .decor {
+        position: absolute;
 
-            .decor {
-                position: absolute;
-                
-                width: 70%;
-                opacity: .2;
-            }
+        width: 70%;
+        opacity: 0.2;
+      }
 
-            .first {
-                top: -15px;
-            }
+      .first {
+        top: -15px;
+      }
 
-            .last {
-                bottom: -15px;
-            }
-        }
+      .last {
+        bottom: -15px;
+      }
     }
-    
-
+  }
 `;
 
-function Sponsors() {
-    return (
-        <Container>
-            <Header hasback hasprofile background="/images/sponsors.jpg" />
+function Sponsors(props) {
+  useEffect(() => {
+    props.fetchSponsors();
+  }, []);
 
-            <Content>
-                <h3>{data.title}</h3>
-                <p>{data.description}</p>
-                {data.sections.map((section, index) => (
-                    <Section key={index}>
-                        <h4>{section.title}</h4>
+  return (
+    <Container>
+      <Header hasback hasprofile background="/images/sponsors.jpg" />
 
-                        <div className="sponsors">
-                            {section.sponsors.map((sponsor, i) => (
-                                <div key={"sponsor_" + i} className="sponsor">
-                                    <img className="decor first" src={"/images/sponsors/" + sponsor.logo + ".png"} alt="logo" />
-                                    <img className="main" src={"/images/sponsors/" + sponsor.logo + ".png"} alt="logo" />
-                                    <img className="decor last" src={"/images/sponsors/" + sponsor.logo + ".png"} alt="logo" />
-                                </div>
-                            ))}
+      <Content>
+        <h3>Thank you to our sponsors</h3>
+        <p>
+          We're excited to bring you an incredible conference, made possible by
+          the generous support of our sponsors.
+        </p>
+        {Object.entries(props.sponsors).map((section, index) => (
+          <Section key={index}>
+            <h4>
+              {section[0] != "organization"
+                ? section[0] + " partner"
+                : section[0]}
+            </h4>
 
-                        </div>
-                    </Section>
-                ))}
-            </Content>
-        </Container>
-    )
+            <div className="sponsors">
+              {section[1].map((sponsor, i) => (
+                <div key={"sponsor_" + i} className="sponsor">
+                  <img
+                    className="decor first"
+                    src={import.meta.env.VITE_API_URL + sponsor.logo}
+                    alt="transparent logo"
+                  />
+                  <img
+                    className="main"
+                    src={import.meta.env.VITE_API_URL + sponsor.logo}
+                    alt="logo"
+                  />
+                  <img
+                    className="decor last"
+                    src={import.meta.env.VITE_API_URL + sponsor.logo}
+                    alt="transparent logo"
+                  />
+                </div>
+              ))}
+            </div>
+          </Section>
+        ))}
+      </Content>
+    </Container>
+  );
 }
 
-export default Sponsors
+const mapStateToProps = (state) => {
+  return {
+    sponsors: state.sponsor.data,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchSponsors: () => dispatch(fetchSponsors()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sponsors);

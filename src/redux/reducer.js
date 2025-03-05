@@ -6,6 +6,9 @@ import chat from "./redux-modules/chat";
 import calendar from "./redux-modules/calendar";
 import networking from "./redux-modules/networking";
 import user from "./redux-modules/user";
+import sponsor from "./redux-modules/sponsor";
+import speaker from "./redux-modules/speaker";
+import resource from "./redux-modules/resource";
 
 export const reducer = combineReducers({
     auth,
@@ -14,5 +17,8 @@ export const reducer = combineReducers({
     chat,
     calendar,
     networking,
-    user
+    user,
+    sponsor,
+    speaker,
+    resource
 });

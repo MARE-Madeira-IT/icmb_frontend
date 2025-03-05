@@ -1,193 +1,269 @@
-import React, { useEffect } from 'react'
-import { Container, Content } from '../helper'
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import { setHasAction, setHasClickedAction } from '../redux/redux-modules/application/actions';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Container, Content } from "../helper";
+import styled from "styled-components";
+import { connect } from "react-redux";
+import {
+  setHasAction,
+  setHasClickedAction,
+} from "../redux/redux-modules/application/actions";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { fetchSpeaker } from "../redux/redux-modules/speaker/actions";
+import dayjs from "dayjs";
+import { updateSelfCalendar } from "../redux/redux-modules/calendar/actions";
+import { createChat } from "../redux/redux-modules/chat/actions";
 
 const Header = styled.section`
-    height: 50vh;
-    position: relative;
-    padding: 0px 20px;
+  height: 50vh;
+  position: relative;
+  padding: 0px 20px;
+  box-sizing: border-box;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(255, 255, 255, 0) 30%
+    );
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  .background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
     box-sizing: border-box;
 
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        background: rgb(255,255,255);
-        background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 30%);
-        width: 100%;
-        height: 100%;
-        z-index: -1;
+    .back {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
     }
-
-    .background {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1;
-    }
-
-    .navbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 10px;
-        box-sizing: border-box;
-
-        .back {
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-        }
-
-    }
+  }
 `;
 
 const Info = styled.section`
+  p {
+    font-size: 14px;
+    margin: 0px;
+  }
 
-    p {
-        font-size: 14px;
-        margin: 0px;
-    }
-
-    h3, h4 {
-        margin: 20px 0px 10px 0px;
-    }
+  h3,
+  h4 {
+    margin: 20px 0px 10px 0px;
+  }
 `;
 
 const SocialContainer = styled.div`
+  display: flex;
+  gap: 5px;
+
+  .social {
+    background-color: #e8e8e8;
+    width: 40px;
+    height: 40px;
     display: flex;
-    gap: 5px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
 
-    .social {
-        background-color: #e8e8e8;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 6px;
-
-        img {
-            width: 50%;
-        }
+    img {
+      width: 50%;
     }
-    
+  }
 `;
 
-function Speaker(props) {
+const ProgramEntry = styled.div`
+  padding: 20px 0px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
 
-    const data = {
-        name: "John Doe",
-        role: "Marine Biologist @ MARE-Madeira",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue. Vestibulum auctor ornare leo, non suscipit magna interdum eu.",
-        social: [
-            {
-                id: 1,
-                platform: "facebook",
-                value: "https://www.figma.com/design/SImeK9lnBpd571HLtBuLQj/ICMB?node-id=0-1&node-type=canvas&t=zypQOAQYJ2oBQV0j-0"
-            },
-            {
-                id: 2,
-                platform: "instagram",
-                value: "my url"
-            },
-            {
-                id: 3,
-                platform: "linkedin",
-                value: "my url"
-            },
-            {
-                id: 4,
-                platform: "pinterest",
-                value: "my url"
-            },
-            {
-                id: 5,
-                platform: "spotify",
-                value: "my url"
-            },
-            {
-                id: 6,
-                platform: "x",
-                value: "my url"
-            },
-            {
-                id: 7,
-                platform: "youtube",
-                value: "my url"
-            },
-            {
-                id: 8,
-                platform: "tiktok",
-                value: "my url"
-            }
-        ],
+  .datetime {
+    padding: 0px 20px;
+    box-sizing: border-box;
+    border-right: 1px solid #e1e1e1;
+    opacity: 0.8;
+
+    p {
+      margin: 0px;
+      font-size: 14px;
+    }
+  }
+
+  .info {
+    padding: 0px 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+
+    button {
+      cursor: pointer;
+      background-color: transparent;
+      border: 0px;
+      box-shadow: 0px;
+
+      img {
+        width: 25px;
+        height: 25px;
+      }
     }
 
-    useEffect(() => {
-        props.setHasAction(true)
-        if (props.hasClickedAction) {
-            setVisible(true);
-            props.setHasClickedAction(false);
-        }
+    .title {
+      h3,
+      p {
+        margin: 0px;
+      }
 
-    }, [props.hasClickedAction])
+      h3 {
+        font-size: 16px;
+      }
+    }
+  }
+`;
 
-    return (
-        <Container>
+const socialNetworks = [
+  "facebook",
+  "instagram",
+  "linkedin",
+  "website",
+  "spotify",
+  "x",
+  "youtube",
+  "tiktok",
+];
 
-            <Header>
-                <img className='background' src="/profile.jpg" alt="" />
+function Speaker(props) {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-                <Link to="/speakers" className='navbar'>
-                    <img className='back' src="/icons/back.svg" alt="icmb logo" />
-                </Link>
-            </Header>
+  useEffect(() => {
+    props.setHasAction(true);
+    if (props.hasClickedAction) {
+      navigate("/chats/1");
+      props.setHasClickedAction(false);
+    }
+  }, [props.hasClickedAction]);
 
-            <Content>
-                <Info>
-                    <h3>{data.name}</h3>
-                    <p>{data.role}</p>
+  useEffect(() => {
+    props.fetchSpeaker(id);
+  }, []);
 
-                    <h4>About</h4>
-                    <p>{data.description}</p>
+  return (
+    <Container>
+      <Header>
+        <img
+          className="background"
+          src={import.meta.env.VITE_API_URL + props.speaker.image}
+          alt=""
+        />
 
-                    <h4>Social Networks</h4>
-                    <SocialContainer>
-                        {data.social.map((currentSocial) => (
-                            <a className='social' href={currentSocial.value} target='__blank'>
-                                <img src={"/icons/social_media/" + currentSocial.platform + ".png"} alt={currentSocial.platform} />
-                            </a>
-                        ))}
-                    </SocialContainer>
+        <Link to="/speakers" className="navbar">
+          <img className="back" src="/icons/back.svg" alt="icmb logo" />
+        </Link>
+      </Header>
 
-                    <h4>Sessions</h4>
-                </Info>
-            </Content>
-        </Container >
-    )
+      <Content>
+        <Info>
+          <h3>{props.speaker.name}</h3>
+          <p>
+            {props.speaker.role} @ {props.speaker.institution}
+          </p>
+
+          <h4>About</h4>
+          <p>{props.speaker.description}</p>
+
+          <h4>Social Networks</h4>
+          <SocialContainer>
+            {socialNetworks.map((currentSocial) => (
+              <div key={currentSocial}>
+                {props.speaker[currentSocial] && (
+                  <a
+                    className="social"
+                    href={props.speaker[currentSocial]}
+                    target="__blank"
+                  >
+                    <img
+                      src={"/icons/social_media/" + currentSocial + ".png"}
+                      alt={currentSocial}
+                    />
+                  </a>
+                )}
+              </div>
+            ))}
+          </SocialContainer>
+
+          <h4>Sessions</h4>
+          {props?.speaker?.id &&
+            props?.speaker?.calendars.map((session) => (
+              <ProgramEntry key={session.id} className="content">
+                <div className="datetime">
+                  <p>{dayjs(session.date).format("MMM DD")}</p>
+                  <p>{dayjs(session.from).format("H:mm A")}</p>
+                  <p>{dayjs(session.to).format("H:mm A")}</p>
+                </div>
+                <div className="info">
+                  <div className="title">
+                    <h3>{session.title}</h3>
+                    <p>{session.room}</p>
+                  </div>
+                  <button>
+                    <img
+                      onClick={() => props.updateSelfCalendar(session.id)}
+                      src={
+                        session.my_schedule
+                          ? "/icons/program_schedule.svg"
+                          : "/icons/program_add.svg"
+                      }
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </ProgramEntry>
+            ))}
+        </Info>
+      </Content>
+    </Container>
+  );
 }
 
 const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.auth.isAuthenticated,
-        hasClickedAction: state.application.hasClickedAction,
-    };
+  return {
+    isAuthenticated: state.auth.isAuthenticated,
+    hasClickedAction: state.application.hasClickedAction,
+    speaker: state.speaker.current,
+  };
 };
 
-
 const mapDispatchToProps = (dispatch) => {
-    return {
-        setHasAction: (value) => dispatch(setHasAction(value)),
-        setHasClickedAction: (value) => dispatch(setHasClickedAction(value)),
-    };
+  return {
+    updateSelfCalendar: (id) => dispatch(updateSelfCalendar(id)),
+    fetchSpeaker: (id) => dispatch(fetchSpeaker(id)),
+    setHasAction: (value) => dispatch(setHasAction(value)),
+    setHasClickedAction: (value) => dispatch(setHasClickedAction(value)),
+    createChat: (data) => dispatch(createChat(data)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Speaker);
