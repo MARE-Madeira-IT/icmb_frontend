@@ -21,13 +21,13 @@ const marks = {
   100: "7",
 };
 
-function PosterForm(props) {
+function SessionForm(props) {
   const { id } = useParams();
   const [form, setForm] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
-    props.fetchQuestions({ type: "poster" });
+    props.fetchQuestions({ type: "session" });
   }, []);
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function PosterForm(props) {
         .createForm({
           answers: formattedAnswers,
           formable_id: id,
-          formable_type: "App\\Models\\Poster",
+          formable_type: "App\\Models\\ProgramSession",
         })
         .then(() => {
           navigate("/");
@@ -101,4 +101,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PosterForm);
+export default connect(mapStateToProps, mapDispatchToProps)(SessionForm);

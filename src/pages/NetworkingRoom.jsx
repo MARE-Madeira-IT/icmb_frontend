@@ -324,7 +324,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUser: (id, data) => dispatch(updateUser(id, data)),
+    updateUser: (data) => dispatch(updateUser(data)),
     fetchNetworkings: () => dispatch(fetchNetworkings()),
     createNetworking: () => dispatch(createNetworking()),
     setHasAction: (value) => dispatch(setHasAction(value)),

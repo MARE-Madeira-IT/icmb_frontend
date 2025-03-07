@@ -69,7 +69,7 @@ function Header({
   return (
     <Container height={height}>
       <div className="navbar">
-        {haslogo && <img className="logo" src="/logo.png" alt="icmb logo" />}
+        {haslogo && <img className="" src="" alt="" />}
         {hasback && (
           <Link to={backroute}>
             <img className="back" src="/icons/back.svg" alt="icmb logo" />

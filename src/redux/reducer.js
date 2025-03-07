@@ -9,6 +9,9 @@ import user from "./redux-modules/user";
 import sponsor from "./redux-modules/sponsor";
 import speaker from "./redux-modules/speaker";
 import resource from "./redux-modules/resource";
+import question from "./redux-modules/question";
+import form from "./redux-modules/form";
+import faq from "./redux-modules/faq";
 
 export const reducer = combineReducers({
     auth,
@@ -20,5 +23,8 @@ export const reducer = combineReducers({
     user,
     sponsor,
     speaker,
-    resource
+    resource,
+    question,
+    form,
+    faq
 });

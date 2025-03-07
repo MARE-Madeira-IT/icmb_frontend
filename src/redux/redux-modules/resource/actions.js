@@ -42,7 +42,7 @@ export const fetchResource = (id) => ({
     }).then(
         response => {
             console.log(response);
-            download(response)
+            download(response, "file" + id);
         },
         error => {
             return error.data;

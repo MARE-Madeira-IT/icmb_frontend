@@ -12,12 +12,14 @@ const actionRoutes = [
   "speaker",
   "poster-voting",
   "networking-room",
+  "session-voting",
 ];
 const actionImages = [
   "/public/icons/message_board.svg",
   "/public/icons/45connect.svg",
   "/public/icons/submit.svg",
   "/public/icons/share.svg",
+  "/public/icons/submit.svg",
 ];
 
 const Container = styled.div`

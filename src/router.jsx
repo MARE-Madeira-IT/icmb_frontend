@@ -16,75 +16,80 @@ import NetworkingRoom from "./pages/NetworkingRoom";
 import AlertBoard from "./pages/AlertBoard";
 import Chat from "./pages/Chat";
 import Login from "./pages/Login";
+import SessionForm from "./pages/SessionForm";
 
 export const router = createBrowserRouter([
-    {
-        element: <Template />,
-        children: [
-            {
-                path: "/",
-                element: <Homepage />,
-            },
-            {
-                path: "/login",
-                element: <Login />,
-            },
-            {
-                path: "/program",
-                element: <Program />,
-            },
-            {
-                path: "/chats",
-                element: <Chats />,
-            },
-            {
-                path: "/chats/:id",
-                element: <Chat />,
-            },
-            {
-                path: "/support",
-                element: <Support />,
-            },
-            {
-                path: "/message-board",
-                element: <MessageBoard />,
-            },
-            {
-                path: "/speakers",
-                element: <Speakers />,
-            },
-            {
-                path: "/speaker/:id",
-                element: <Speaker />,
-            },
-            {
-                path: "/venue",
-                element: <Venue />,
-            },
-            {
-                path: "/sponsors",
-                element: <Sponsors />,
-            },
-            {
-                path: "/resources",
-                element: <Resources />,
-            },
-            {
-                path: "/voting",
-                element: <Voting />,
-            },
-            {
-                path: "/poster-voting",
-                element: <PosterForm />,
-            },
-            {
-                path: "/networking-room",
-                element: <NetworkingRoom />,
-            },
-            {
-                path: "/alert-board",
-                element: <AlertBoard />,
-            },
-        ],
-    },
+  {
+    element: <Template />,
+    children: [
+      {
+        path: "/",
+        element: <Homepage />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/program",
+        element: <Program />,
+      },
+      {
+        path: "/chats",
+        element: <Chats />,
+      },
+      {
+        path: "/chats/:id",
+        element: <Chat />,
+      },
+      {
+        path: "/support",
+        element: <Support />,
+      },
+      {
+        path: "/message-board",
+        element: <MessageBoard />,
+      },
+      {
+        path: "/speakers",
+        element: <Speakers />,
+      },
+      {
+        path: "/speaker/:id",
+        element: <Speaker />,
+      },
+      {
+        path: "/venue",
+        element: <Venue />,
+      },
+      {
+        path: "/sponsors",
+        element: <Sponsors />,
+      },
+      {
+        path: "/resources",
+        element: <Resources />,
+      },
+      {
+        path: "/voting",
+        element: <Voting />,
+      },
+      {
+        path: "/poster-voting/:id",
+        element: <PosterForm />,
+      },
+      {
+        path: "/session-voting/:id",
+        element: <SessionForm />,
+      },
+      {
+        path: "/networking-room",
+        element: <NetworkingRoom />,
+      },
+      {
+        path: "/alert-board",
+        element: <AlertBoard />,
+      },
+    ],
+  },
 ]);

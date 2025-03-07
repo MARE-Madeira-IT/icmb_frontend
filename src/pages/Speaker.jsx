@@ -161,7 +161,10 @@ function Speaker(props) {
   useEffect(() => {
     props.setHasAction(true);
     if (props.hasClickedAction) {
-      navigate("/chats/1");
+      props.createChat({ user_id: props.speaker.user_id }).then((response) => {
+        navigate("/chats/" + response.action.payload.data.data.id);
+      });
+
       props.setHasClickedAction(false);
     }
   }, [props.hasClickedAction]);
