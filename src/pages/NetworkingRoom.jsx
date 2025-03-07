@@ -210,7 +210,6 @@ function NetworkingRoom(props) {
 
   const handleProfileEdit = (values) => {
     let formData = new FormData();
-    formData.append("_method", "PATCH");
 
     if (values.image != props.user.image) {
       formData.append("image", values.image);
