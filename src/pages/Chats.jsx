@@ -107,7 +107,12 @@ function Chats(props) {
                 >
                   <Chatroom>
                     <div className="image">
-                      <img src={chat?.recipient?.image} alt="" />
+                      <img
+                        src={
+                          import.meta.env.VITE_API_URL + chat?.recipient?.image
+                        }
+                        alt=""
+                      />
                     </div>
                     <div className="content">
                       <div className="info">

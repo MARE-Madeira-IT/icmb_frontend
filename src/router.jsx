@@ -17,6 +17,7 @@ import AlertBoard from "./pages/AlertBoard";
 import Chat from "./pages/Chat";
 import Login from "./pages/Login";
 import SessionForm from "./pages/SessionForm";
+import Settings from "./pages/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -89,6 +90,10 @@ export const router = createBrowserRouter([
       {
         path: "/alert-board",
         element: <AlertBoard />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
       },
     ],
   },

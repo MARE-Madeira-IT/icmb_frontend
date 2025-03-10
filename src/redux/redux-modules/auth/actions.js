@@ -39,7 +39,7 @@ export const logout = () => {
     return (dispatch) => {
         const response = dispatch({
             type: types.LOGOUT,
-            payload: axios.get(`${import.meta.env.VITE_API_URL}/api/logout`),
+            payload: axios.post(`${import.meta.env.VITE_API_URL}/api/logout`),
         });
         response.then((res) => {
             resetToken();

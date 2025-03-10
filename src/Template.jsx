@@ -4,7 +4,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "./globalStyles";
 import { connect } from "react-redux";
 import { dark, light } from "./theme";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { setHasAction } from "./redux/redux-modules/application/actions";
 
 const actionRoutes = [
@@ -31,6 +31,13 @@ const Container = styled.div`
 function Template(props) {
   const [currentActionImage, setCurrentActionImage] = useState("");
   let location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!props.isAuthenticated) {
+      navigate("/login");
+    }
+  }, [props.isAuthenticated]);
 
   useEffect(() => {
     let pathname = getCurrentPathWithoutLastPart(location.pathname);
@@ -52,7 +59,9 @@ function Template(props) {
       <Container>
         <GlobalStyles />
         <Outlet />
-        <Navbar currentActionImage={currentActionImage} />
+        {location.pathname != "/login" && (
+          <Navbar currentActionImage={currentActionImage} />
+        )}
       </Container>
     </ThemeProvider>
   );
@@ -60,6 +69,7 @@ function Template(props) {
 
 const mapStateToProps = (state) => {
   return {
+    isAuthenticated: state.auth.isAuthenticated,
     theme: state.application.theme,
   };
 };

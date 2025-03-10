@@ -1,4 +1,4 @@
-import { Container, dimensions } from "../helper";
+import { Container, Content, dimensions } from "../helper";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
@@ -8,14 +8,16 @@ import {
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
+import Header from "../common/Header";
 
 const Input = styled.input`
-  width: 60%;
+  width: 100%;
   box-sizing: border-box;
   margin: 15px 0;
   border: none;
-  border-bottom: 2px solid #777;
+  border-bottom: 1px solid #a7a7a7;
   padding: 8px;
+  font-size: 16px;
 
   &:focus,
   &:active {
@@ -33,74 +35,51 @@ const Input = styled.input`
   }
 `;
 
-const FormContainer = styled.div`
-  z-index: 1;
-  position: relative;
-  height: 450px;
+const CustomContent = styled(Content)`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  min-height: calc(100vh - 400px);
 `;
 
-const Card = styled.div`
-  width: 50%;
-  max-width: 500px;
-  min-width: 120px;
-  min-height: 500px;
-  display: block;
-  padding: 20px;
-  background: blue;
-  position: relative;
-  box-shadow: 0px 0px 24px #0000005a;
-
-  @media (max-width: ${dimensions.lg}) {
-    width: 70%;
-  }
-
-  @media (max-width: ${dimensions.md}) {
-    width: 90%;
-  }
-
-  @media (max-width: ${dimensions.sm}) {
-    width: 100%;
-  }
-
-  .screen__background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    -webkit-clip-path: inset(0 0 0 0);
-    clip-path: inset(0 0 0 0);
-  }
-
-  .screen__background__shape {
-    transform: rotate(45deg);
-    position: absolute;
-    height: 520px;
-    width: 520px;
-    background: #fff;
-    top: -50px;
-    right: 180px;
-    border-radius: 0 72px 0 0;
-  }
+const FormContainer = styled.div`
+  width: 100%;
+  flex: 1;
 `;
 
 const Button = styled.button`
-  margin-top: 30px;
+  margin: 30px auto;
   display: block;
-  padding: 10px 26px;
+  padding: 12px 36px;
   border: none;
-  background: blue;
+  background: ${({ theme }) => theme.darkGradient};
   color: white;
   cursor: pointer;
-  font-size: 16px;
   transition: all 0.3s ease;
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: 18px;
+  width: 100%;
 
   &:hover {
-    background: lightblue;
+    background: ${({ theme }) => theme.primary};
+  }
+`;
+
+const ProblemContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+
+  p {
+    width: 100%;
+    text-align: right;
+    margin: 0px;
+  }
+
+  a {
+    font-weight: bold;
+    color: black;
   }
 `;
 
@@ -122,7 +101,10 @@ function Login(props) {
 
   return (
     <Container>
-      <Card>
+      <Header height="350px" background="/images/default_header.jpg" />
+      <CustomContent>
+        <h2>Login to proceed</h2>
+
         <FormContainer>
           <div>
             <Input
@@ -141,14 +123,15 @@ function Login(props) {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Button onClick={submitForm}>
-              {props.loading ? "Loading..." : "Login"}
+              {props.loading ? "Loading..." : "SIGN IN"}
             </Button>
           </div>
         </FormContainer>
-        <div className="screen__background">
-          <span className="screen__background__shape"></span>
-        </div>
-      </Card>
+        <ProblemContainer>
+          <p>Problems signing to your account?</p>
+          <a href="mailto:icmb@marinebioinvasions.info">Contact us</a>
+        </ProblemContainer>
+      </CustomContent>
     </Container>
   );
 }
