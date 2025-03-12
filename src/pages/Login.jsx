@@ -122,7 +122,7 @@ function Login(props) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Button onClick={submitForm}>
+            <Button type="button" value="submit" onClick={submitForm}>
               {props.loading ? "Loading..." : "SIGN IN"}
             </Button>
           </div>

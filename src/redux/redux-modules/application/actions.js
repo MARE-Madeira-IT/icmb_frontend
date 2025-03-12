@@ -23,3 +23,10 @@ export function setHasClickedAction(value = true) {
         type: types.SET_HAS_CLICKED_ACTION, payload: value
     };
 }
+
+
+export function setNotifications(data) {
+    return {
+        type: types.SET_NOTIFICATIONS, payload: data
+    };
+}

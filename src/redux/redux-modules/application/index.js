@@ -1,9 +1,13 @@
+import { notification } from "antd";
 import { types } from "./types";
 
 export const initialState = {
     theme: "light",
     hasAction: false,
     hasClickedAction: false,
+    notifications: {},
+    notificationTitle: "",
+    notificationType: "info"
 }
 
 export default (state = initialState, action = {}) => {
@@ -26,6 +30,15 @@ export default (state = initialState, action = {}) => {
                 ...state,
                 hasClickedAction: action.payload,
             };
+
+        case `${types.SET_NOTIFICATIONS}`:
+            return {
+                ...state,
+                notificationTitle: action.payload.title,
+                notifications: action.payload.notifications,
+                notificationType: action.payload.type,
+            };
+
 
         default:
             return state

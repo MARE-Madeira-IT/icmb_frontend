@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import {
   setHasAction,
   setHasClickedAction,
+  setNotifications,
 } from "../redux/redux-modules/application/actions";
 import {
   createNetworking,
@@ -202,7 +203,13 @@ function NetworkingRoom(props) {
 
   const confirm = () => {
     setVisible(false);
-    props.createNetworking();
+    props.createNetworking().catch((err) => {
+      props.setNotifications({
+        notifications: err.response.data.errors,
+        title: "Missing information",
+        type: "error",
+      });
+    });
   };
   const cancel = () => {
     setVisible(false);
@@ -216,13 +223,22 @@ function NetworkingRoom(props) {
     }
 
     formData.append("name", values.name);
-    formData.append("role", values.role);
-    formData.append("institution", values.institution);
-    formData.append("description", values.description);
+    values.role && formData.append("role", values.role);
+    values.institution && formData.append("institution", values.institution);
+    values.description && formData.append("description", values.description);
 
-    props.updateUser(formData).then(() => {
-      setFormVisibility(false);
-    });
+    props
+      .updateUser(formData)
+      .then(() => {
+        setFormVisibility(false);
+      })
+      .catch((err) => {
+        props.setNotifications({
+          notifications: err.response.data.errors,
+          title: "Invalid data",
+          type: "error",
+        });
+      });
   };
 
   return (
@@ -328,6 +344,7 @@ const mapDispatchToProps = (dispatch) => {
     createNetworking: () => dispatch(createNetworking()),
     setHasAction: (value) => dispatch(setHasAction(value)),
     setHasClickedAction: (value) => dispatch(setHasClickedAction(value)),
+    setNotifications: (data) => dispatch(setNotifications(data)),
   };
 };
 

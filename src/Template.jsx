@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { dark, light } from "./theme";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { setHasAction } from "./redux/redux-modules/application/actions";
+import Notification from "./common/Notification";
 
 const actionRoutes = [
   "message-board",
@@ -57,6 +58,7 @@ function Template(props) {
   return (
     <ThemeProvider theme={props.theme === "light" ? light : dark}>
       <Container>
+        <Notification />
         <GlobalStyles />
         <Outlet />
         {location.pathname != "/login" && (

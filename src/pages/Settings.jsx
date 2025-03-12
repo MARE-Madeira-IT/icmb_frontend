@@ -1,80 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../common/Header";
 import { Container, Content } from "../helper";
 import styled from "styled-components";
 import { connect } from "react-redux";
 import { logout } from "../redux/redux-modules/auth/actions";
-
-const Action = styled.div`
-  color: red;
-`;
+import SettingsForm from "./Settings/SettingsForm";
 
 const FieldContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 15px 0px;
-
-  p {
-    margin: 0;
+  a {
+    color: black;
+    text-decoration: none;
   }
 
-  .value {
-    color: #4d4d4dff;
-  }
-
-  .red {
-    color: red;
-  }
-
-  button {
-    background: none;
-    border: none;
+  .field-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0px;
     cursor: pointer;
-    img {
-      width: 10px;
+
+    p {
+      margin: 0;
+    }
+
+    .value {
+      color: #4d4d4dff;
+    }
+
+    .red {
+      color: red;
+    }
+
+    button {
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      img {
+        width: 10px;
+      }
     }
   }
 `;
 
 function Settings(props) {
+  const [formVisibility, setFormVisibility] = useState(false);
+  const [fields, setFields] = useState([]);
   const { user } = props;
 
-  const Field = ({ label, value, highlight, action, link }) => (
-    <FieldContainer>
+  const FieldContent = ({ aProps }) => (
+    <div className="field-container">
       <div>
-        <p className={highlight}>{label}</p>
-        {value && <p className="value">{value}</p>}
+        <p className={aProps.highlight}>{aProps.label}</p>
+        {aProps.value && <p className="value">{aProps.value}</p>}
       </div>
-      {link ? (
-        <a href={link} target="_blank" rel="noopener noreferrer">
-          <button>
-            <img src="/icons/settings_edit.svg" alt="" />
-          </button>
+
+      <button>
+        <img src="/icons/settings_edit.svg" alt="" />
+      </button>
+    </div>
+  );
+
+  const Field = (aProps) => (
+    <FieldContainer onClick={aProps.action}>
+      {aProps.link ? (
+        <a href={aProps.link} target="_blank" rel="noopener noreferrer">
+          <FieldContent aProps={aProps} />
         </a>
       ) : (
-        <button onClick={action}>
-          <img src="/icons/settings_edit.svg" alt="" />
-        </button>
+        <FieldContent aProps={aProps} />
       )}
     </FieldContainer>
   );
 
-  const FieldLink = ({ label, link }) => (
-    <FieldContainer>
-      <div>
-        <p>{label}</p>
-      </div>
-      <a href={link} target="_blank" rel="noopener noreferrer">
-        <button>
-          <img src="/icons/settings_edit.svg" alt="" />
-        </button>
-      </a>
-    </FieldContainer>
-  );
+  const handleFormOpen = (aFields) => {
+    setFields(aFields);
+    setFormVisibility(true);
+  };
 
   return (
     <Container>
+      <SettingsForm
+        fields={fields}
+        initEmail={props?.user?.email}
+        visible={formVisibility}
+        setVisible={setFormVisibility}
+      />
       <Header hasback hasprofile background="/images/default_header.jpg" />
       <Content>
         <h3>Personal Details</h3>
@@ -83,8 +94,16 @@ function Settings(props) {
           community safe.
         </p>
 
-        <Field label="Contact info" value={user?.email} />
-        <Field label="Change password" value="**********" />
+        <Field
+          action={() => handleFormOpen(["email"])}
+          label="Contact info"
+          value={user?.email}
+        />
+        <Field
+          action={() => handleFormOpen(["password"])}
+          label="Change password"
+          value="**********"
+        />
 
         <h3>Rules & Policy</h3>
         <p>
