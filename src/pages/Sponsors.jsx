@@ -75,7 +75,7 @@ function Sponsors(props) {
             <h4>
               {section[0] != "organization"
                 ? section[0] + " partner"
-                : section[0]}
+                : section[0]} 
             </h4>
 
             <div className="sponsors">

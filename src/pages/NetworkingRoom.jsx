@@ -260,19 +260,18 @@ function NetworkingRoom(props) {
           <img className="back" src="/icons/back.svg" alt="icmb logo" />
         </Link>
       </Header>
-      <Popconfirm
-        style={{ width: "300px" }}
-        className="networkingroom-popconfirm"
-        title="You'll share your profile with the community."
-        description="You're able to share your profile once every six hours. This action cannot be reverted."
-        open={visible}
-        onConfirm={confirm}
-        onCancel={cancel}
-        okText="Yes"
-        cancelText="No"
-      >
-        <HiddenPopconfirm className="networkingroom-popconfirm" />
-      </Popconfirm>
+      <HiddenPopconfirm>
+        <Popconfirm
+          style={{ width: "300px" }}
+          title="You'll share your profile with the community."
+          description="You're able to share your profile once every six hours. This action cannot be reverted."
+          open={visible}
+          onConfirm={confirm}
+          onCancel={cancel}
+          okText="Yes"
+          cancelText="No"
+        />
+      </HiddenPopconfirm>
       <Content>
         {props?.user?.id && (
           <UserInfo>
