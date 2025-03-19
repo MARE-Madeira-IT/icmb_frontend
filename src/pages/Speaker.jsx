@@ -176,11 +176,7 @@ function Speaker(props) {
   return (
     <Container>
       <Header>
-        <img
-          className="background"
-          src={import.meta.env.VITE_API_URL + props.speaker.image}
-          alt=""
-        />
+        <img className="background" src={props.speaker.image} alt="" />
 
         <Link to="/speakers" className="navbar">
           <img className="back" src="/icons/back.svg" alt="icmb logo" />

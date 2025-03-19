@@ -85,7 +85,6 @@ function Resources(props) {
     props.fetchResources();
   }, []);
 
-  console.log(props.data);
   return (
     <Container>
       <Header hasback hasprofile background="/images/default_header.jpg" />

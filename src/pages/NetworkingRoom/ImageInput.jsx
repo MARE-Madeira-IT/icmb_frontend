@@ -8,7 +8,7 @@ const ImageInput = ({ initImage, handleForm }) => {
       uid: "-1",
       name: "image.png",
       status: "done",
-      url: import.meta.env.VITE_API_URL + initImage,
+      url: initImage,
     },
   ]);
   // useEffect(() => {

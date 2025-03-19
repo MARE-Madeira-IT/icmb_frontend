@@ -250,11 +250,7 @@ function NetworkingRoom(props) {
         user={props.user}
       />
       <Header>
-        <img
-          className="background"
-          src={import.meta.env.VITE_API_URL + props?.user?.image}
-          alt=""
-        />
+        <img className="background" src={props?.user?.image} alt="" />
 
         <Link to="/" className="navbar">
           <img className="back" src="/icons/back.svg" alt="icmb logo" />
@@ -307,7 +303,7 @@ function NetworkingRoom(props) {
         {props.data.map((message) => (
           <Message key={message.id}>
             <div className="header">
-              <img src={import.meta.env.VITE_API_URL + message.image} alt="" />
+              <img src={message.image} alt="" />
               <h4>{message.name}</h4>
             </div>
             <p>{message.description}</p>

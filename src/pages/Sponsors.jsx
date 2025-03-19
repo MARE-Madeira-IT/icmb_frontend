@@ -75,7 +75,7 @@ function Sponsors(props) {
             <h4>
               {section[0] != "organization"
                 ? section[0] + " partner"
-                : section[0]} 
+                : section[0]}
             </h4>
 
             <div className="sponsors">
@@ -83,17 +83,13 @@ function Sponsors(props) {
                 <div key={"sponsor_" + i} className="sponsor">
                   <img
                     className="decor first"
-                    src={import.meta.env.VITE_API_URL + sponsor.logo}
+                    src={sponsor.logo}
                     alt="transparent logo"
                   />
-                  <img
-                    className="main"
-                    src={import.meta.env.VITE_API_URL + sponsor.logo}
-                    alt="logo"
-                  />
+                  <img className="main" src={sponsor.logo} alt="logo" />
                   <img
                     className="decor last"
-                    src={import.meta.env.VITE_API_URL + sponsor.logo}
+                    src={sponsor.logo}
                     alt="transparent logo"
                   />
                 </div>

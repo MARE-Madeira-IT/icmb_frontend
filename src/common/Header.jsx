@@ -77,11 +77,7 @@ function Header({
         )}
         {hasprofile && (
           <Link to="/settings">
-            <img
-              className="profile"
-              src={import.meta.env.VITE_API_URL + user?.image}
-              alt="profile pic"
-            />
+            <img className="profile" src={user?.image} alt="profile pic" />
           </Link>
         )}
       </div>

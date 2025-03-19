@@ -120,7 +120,7 @@ function Speakers(props) {
                   className="background"
                 />
                 <img
-                  src={import.meta.env.VITE_API_URL + speaker.secundary_image}
+                  src={speaker.secundary_image}
                   alt="speaker photo"
                   className="speaker"
                 />

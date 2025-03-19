@@ -109,7 +109,7 @@ function Chats(props) {
                     <div className="image">
                       <img
                         src={
-                          import.meta.env.VITE_API_URL + chat?.recipient?.image
+                          chat?.recipient?.image
                         }
                         alt=""
                       />
