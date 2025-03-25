@@ -90,7 +90,11 @@ function Login(props) {
   let navigate = useNavigate();
 
   const submitForm = () => {
-    props.login({ email: email, password: password });
+    props.login({ email: email, password: password }).then((res) => {
+      const token = res.value.data.token;
+      localStorage.setItem("token", token);
+      setAuthorizationToken(token);
+    }).catch(err => console.log(err))
   };
 
   useEffect(() => {
@@ -146,6 +150,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     login: (data) => dispatch(login(data)),
+    setAuthorizationToken: (token) => dispatch(setAuthorizationToken(token)),
   };
 };
 

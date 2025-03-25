@@ -10,17 +10,22 @@ import { jwtDecode } from "jwt-decode";
 //     payload: api.createUser(data),
 // });
 
-export const login = (data) => {
-    return (dispatch) => {
-        return axios.post(`${import.meta.env.VITE_API_URL}/api/login`, data).then((res) => {
-            console.log(res.data.token);
-            const token = res.data.token.token;
-            localStorage.setItem("token", token);
-            setAuthorizationToken(token);
-            dispatch(loginSuccess(jwtDecode(token), res.data.user.user));
-        });
-    };
-};
+// export const login = (data) => {
+//     return (dispatch) => {
+//         return axios.post(`${import.meta.env.VITE_API_URL}/api/login`, data).then((res) => {
+//             console.log(res.data.token);
+//             const token = res.data.token.token;
+//             localStorage.setItem("token", token);
+//             setAuthorizationToken(token);
+//             dispatch(loginSuccess(jwtDecode(token), res.data.user.user));
+//         });
+//     };
+// };
+
+export const login = (data) => ({
+    type: types.LOGIN,
+    payload: axios.post(`${import.meta.env.VITE_API_URL}/api/login`, data),
+  });
 
 export const me = () => ({
     type: types.ME,

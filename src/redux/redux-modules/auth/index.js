@@ -4,7 +4,9 @@ const initialState = {
   data: [], //
   isAuthenticated: false,
   loading: false,
-  user: null,
+  user: {},
+  invites: [],
+  invitesMeta: {},
 };
 
 export default (state = initialState, action = {}) => {
@@ -14,6 +16,8 @@ export default (state = initialState, action = {}) => {
     case `${types.LOGOUT}_PENDING`:
     case `${types.ME}_PENDING`:
     case `${types.UPDATE_PROFILE_PICTURE}_PENDING`:
+    case `${types.FETCH_INVITES}_PENDING`:
+    case `${types.ACCEPT_INVITE}_PENDING`:
     case `${types.UPDATE_USER}_PENDING`:
       return {
         ...state,
@@ -21,16 +25,15 @@ export default (state = initialState, action = {}) => {
       };
 
     case `${types.CREATE_USER}_REJECTED`:
-    case `${types.ME}_REJECTED`:
     case `${types.LOGIN}_REJECTED`:
-    case `${types.LOGOUT}_REJECTED`:
     case `${types.UPDATE_PROFILE_PICTURE}_REJECTED`:
+    case `${types.ACCEPT_INVITE}_REJECTED`:
     case `${types.UPDATE_USER}_REJECTED`:
+    case `${types.FETCH_INVITES}_REJECTED`:
       return {
         ...state,
         loading: false,
       };
-
     case `${types.UPDATE_USER}_FULFILLED`:
       return {
         ...state,
@@ -38,7 +41,6 @@ export default (state = initialState, action = {}) => {
         isAuthenticated: true,
         user: action.payload.data.data,
       };
-
     case `${types.CREATE_USER}_FULFILLED`:
       return {
         ...state,
@@ -47,33 +49,56 @@ export default (state = initialState, action = {}) => {
       };
 
     case `${types.ME}_FULFILLED`:
-    case `${types.LOGIN}_FULFILLED`:
       return {
         ...state,
         loading: false,
         isAuthenticated: true,
         user: action.payload.data.data,
       };
+    case `${types.LOGIN}_FULFILLED`:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        user: action.payload.data.user,
+      };
 
     case `${types.LOGOUT}_FULFILLED`:
+    case `${types.ME}_REJECTED`:
+    case `${types.LOGOUT}_REJECTED`:
       return {
         ...state,
         loading: false,
         isAuthenticated: false,
         user: null,
-      };
-    case `${types.LOGIN_SUCCESS}`:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticated: true,
-        user: action.user,
+        token: null,
       };
     case `${types.UPDATE_PROFILE_PICTURE}_FULFILLED`:
       return {
         ...state,
         loading: false,
         user: action.payload.data.data,
+      };
+
+    case `${types.FETCH_INVITES}_FULFILLED`:
+      return {
+        ...state,
+        loading: false,
+        invites: action.payload.data.data,
+        invitesMeta: action.payload.data.meta,
+      };
+    case `${types.ACCEPT_INVITE}_FULFILLED`:
+      return {
+        ...state,
+        loading: false,
+        invitesMeta: {
+          ...state.invitesMeta,
+          total: state.invitesMeta.total - 1,
+        },
+        invites: state.invites.filter(
+          (record) =>
+            !(record.id === action.meta.id && record.type === action.meta.type)
+        ),
       };
 
     default:
