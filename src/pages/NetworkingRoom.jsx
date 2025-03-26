@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container, Content } from "../helper";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   setHasAction,
@@ -15,6 +15,7 @@ import {
 import { updateUser } from "../redux/redux-modules/auth/actions";
 import { Popconfirm } from "antd";
 import ProfileForm from "./NetworkingRoom/ProfileForm";
+import { createChat } from "../redux/redux-modules/chat/actions";
 
 const Header = styled.section`
   height: 50vh;
@@ -186,13 +187,22 @@ const Message = styled.div`
 `;
 
 function NetworkingRoom(props) {
+  const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const [formVisibility, setFormVisibility] = useState(false);
 
   useEffect(() => {
     props.setHasAction(true);
     if (props.hasClickedAction) {
-      setVisible(true);
+      if (props?.user?.description) {
+        setVisible(true);
+      } else {
+        props.setNotifications({
+          notifications: { error: null },
+          title: "Set your user about first",
+          type: "error",
+        });
+      }
       props.setHasClickedAction(false);
     }
   }, [props.hasClickedAction]);
@@ -239,6 +249,12 @@ function NetworkingRoom(props) {
           type: "error",
         });
       });
+  };
+
+  const handleConnect = (user_id) => {
+    props.createChat({ user_id: user_id }).then((response) => {
+      navigate("/chats/" + response.action.payload.data.data.id);
+    });
   };
 
   return (
@@ -308,12 +324,15 @@ function NetworkingRoom(props) {
             </div>
             <p>{message.description}</p>
             {message.user_id != props.user.id ? (
-              <Link to={"/chats/" + message.id} className="button-container">
-                <button className={message.connected ? "active" : ""}>
+              <div className="button-container">
+                <button
+                  onClick={() => handleConnect(message.user_id)}
+                  className={message.connected ? "active" : ""}
+                >
                   <p>{message.connected ? "connected" : "connect"} </p>
                   <img src="/icons/connect.svg" alt="" />
                 </button>
-              </Link>
+              </div>
             ) : (
               <br />
             )}
@@ -335,6 +354,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     updateUser: (data) => dispatch(updateUser(data)),
+    createChat: (data) => dispatch(createChat(data)),
     fetchNetworkings: () => dispatch(fetchNetworkings()),
     createNetworking: () => dispatch(createNetworking()),
     setHasAction: (value) => dispatch(setHasAction(value)),
