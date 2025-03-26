@@ -114,7 +114,7 @@ function Resources(props) {
               {section[1].map((section) => (
                 <div className="collapsable-flex-container">
                   <p className="title">{section.title}</p>
-                  <button onClick={() => props.fetchResource(section.id)}>
+                  <button onClick={() => props.fetchResource(section)}>
                     <img src="/icons/download.svg" alt="" />
                     <span>Download</span>
                   </button>
