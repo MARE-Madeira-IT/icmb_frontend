@@ -7,6 +7,7 @@ import { dark, light } from "./theme";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { setHasAction } from "./redux/redux-modules/application/actions";
 import Notification from "./common/Notification";
+import { countNotifications } from "./redux/redux-modules/notification/actions";
 
 const actionRoutes = [
   "message-board",
@@ -41,6 +42,7 @@ function Template(props) {
   }, [props.isAuthenticated]);
 
   useEffect(() => {
+    props.countNotifications();
     let pathname = getCurrentPathWithoutLastPart(location.pathname);
     props.setHasAction(actionRoutes.includes(pathname));
     let hasAction = actionRoutes.includes(pathname);
@@ -79,6 +81,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     setHasAction: (value) => dispatch(setHasAction(value)),
+    countNotifications: () => dispatch(countNotifications()),
   };
 };
 

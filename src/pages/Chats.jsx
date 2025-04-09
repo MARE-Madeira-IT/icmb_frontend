@@ -8,6 +8,7 @@ import styled from "styled-components";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { markAsRead } from "../redux/redux-modules/message/actions";
+import { Empty } from "antd";
 
 dayjs.extend(relativeTime);
 const Chatroom = styled.div`
@@ -97,40 +98,41 @@ function Chats(props) {
           <div className="card">
             <div
               className="card-body"
-              style={{ height: "500px", overflowY: "auto" }}
+              style={{ height: "calc(100vh - 335px)", overflowY: "auto" }}
             >
-              {props?.chats?.map((chat) => (
-                <Link
-                  style={{ textDecoration: "none" }}
-                  to={"/chats/" + chat.id}
-                  key={chat.id}
-                >
-                  <Chatroom>
-                    <div className="image">
-                      <img
-                        src={
-                          chat?.recipient?.image
-                        }
-                        alt=""
-                      />
-                    </div>
-                    <div className="content">
-                      <div className="info">
-                        <h3>{chat?.recipient?.name}</h3>
-                        <p>{chat?.message?.content}</p>
+              {props.chats.length ? (
+                props?.chats?.map((chat) => (
+                  <Link
+                    style={{ textDecoration: "none" }}
+                    to={"/chats/" + chat.id}
+                    key={chat.id}
+                  >
+                    <Chatroom>
+                      <div className="image">
+                        <img src={chat?.recipient?.image} alt="" />
                       </div>
-                      <div className="details">
-                        <p className="date">
-                          {dayjs(chat?.message?.created_at).fromNow()}
-                        </p>
-                        {chat.unread_messages ? (
-                          <p className="notification">{chat.unread_messages}</p>
-                        ) : null}
+                      <div className="content">
+                        <div className="info">
+                          <h3>{chat?.recipient?.name}</h3>
+                          <p>{chat?.message?.content}</p>
+                        </div>
+                        <div className="details">
+                          <p className="date">
+                            {dayjs(chat?.message?.created_at).fromNow()}
+                          </p>
+                          {chat.unread_messages ? (
+                            <p className="notification">
+                              {chat.unread_messages}
+                            </p>
+                          ) : null}
+                        </div>
                       </div>
-                    </div>
-                  </Chatroom>
-                </Link>
-              ))}
+                    </Chatroom>
+                  </Link>
+                ))
+              ) : (
+                <Empty description="You haven't connected with anyone yet." />
+              )}
             </div>
           </div>
         </div>

@@ -54,6 +54,7 @@ export const Content = styled.section`
     padding: 0px 20px;
     box-sizing: border-box;
     margin-bottom: 50px;
+    min-height: calc(100vh - 430px);
 `;
 
 export function download(response, filename) {

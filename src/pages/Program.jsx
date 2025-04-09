@@ -8,6 +8,7 @@ import {
   updateSelfCalendar,
 } from "../redux/redux-modules/calendar/actions";
 import { connect } from "react-redux";
+import CustomEmpty from "../common/CustomEmpty";
 
 const HeaderContent = styled.div`
   height: calc(100% - 60px);
@@ -212,36 +213,38 @@ function Program(props) {
         </Filters>
 
         <SectionContainer>
-          {Object.entries(data).map((section, index) => (
-            <div key={"section_" + index}>
-              {filters[currentFilter] ==
-                dayjs(section[0]).format("YYYY-MM-DD") && (
-                <div>
-                  {myProgram == 0 && (
-                    <h4 style={{ fontWeight: "400" }}>
-                      {dayjs(section[0]).format("HH:mm A")}
-                    </h4>
-                  )}
-                  {myProgram == 1 &&
-                    section[1].some((centry) => centry.my_schedule == 1) && (
+          <CustomEmpty>
+            {Object.entries(data).map((section, index) => (
+              <div key={"section_" + index}>
+                {filters[currentFilter] ==
+                  dayjs(section[0]).format("YYYY-MM-DD") && (
+                  <div>
+                    {myProgram == 0 && (
                       <h4 style={{ fontWeight: "400" }}>
                         {dayjs(section[0]).format("HH:mm A")}
                       </h4>
                     )}
-                  {section[1].map((entry, i) => (
-                    <div key={entry.id}>
-                      {myProgram == 0 ? (
-                        <CalendarEntry entry={entry} />
-                      ) : (
-                        myProgram == 1 &&
-                        entry.my_schedule && <CalendarEntry entry={entry} />
+                    {myProgram == 1 &&
+                      section[1].some((centry) => centry.my_schedule == 1) && (
+                        <h4 style={{ fontWeight: "400" }}>
+                          {dayjs(section[0]).format("HH:mm A")}
+                        </h4>
                       )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+                    {section[1].map((entry, i) => (
+                      <div key={entry.id}>
+                        {myProgram == 0 ? (
+                          <CalendarEntry entry={entry} />
+                        ) : (
+                          myProgram == 1 &&
+                          entry.my_schedule && <CalendarEntry entry={entry} />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </CustomEmpty>
         </SectionContainer>
       </Content>
     </Container>

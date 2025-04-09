@@ -12,6 +12,7 @@ import resource from "./redux-modules/resource";
 import question from "./redux-modules/question";
 import form from "./redux-modules/form";
 import faq from "./redux-modules/faq";
+import notification from "./redux-modules/notification";
 
 export const reducer = combineReducers({
     auth,
@@ -26,5 +27,6 @@ export const reducer = combineReducers({
     resource,
     question,
     form,
-    faq
+    faq,
+    notification
 });
