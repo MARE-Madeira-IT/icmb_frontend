@@ -14,7 +14,7 @@ import useOnScreen from "../common/useOnScreen";
 import ImageSvg from "../assets/message_board/image.svg?react";
 import TextSvg from "../assets/message_board/text.svg?react";
 import ImgCrop from "antd-img-crop";
-
+import { UploadOutlined } from "@ant-design/icons";
 const Item = styled.div`
   border-radius: 10px;
   overflow: hidden;
@@ -28,8 +28,9 @@ const Item = styled.div`
 
   & .author-info {
     flex-direction: row;
-    gap: 5px;
+    gap: 10px;
     align-items: center;
+    display: flex;
   }
   & .profile-img {
     aspect-ratio: 1;
@@ -113,6 +114,24 @@ const PreviewContainer = styled.div`
   }
 `;
 
+const UploadContainer = styled.div`
+  & .ant-upload-wrapper,
+  & .ant-upload {
+    width: 100%;
+    display: block;
+  }
+  & span.ant-upload {
+    border: 1px solid #75aae9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+`;
+
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -141,6 +160,8 @@ function MessageBoard(props) {
     props.setHasAction(true);
     if (props.hasClickedAction) {
       setVisible(true);
+      setFormValues({});
+      setImagePreview(null);
       props.setHasClickedAction(false);
     }
   }, [props.hasClickedAction]);
@@ -206,37 +227,43 @@ function MessageBoard(props) {
         </TypeButtonsContainer>
 
         {type === 1 ? (
-          <Input
-            type="textarea"
+          <Input.TextArea
+            rows={5}
+            maxLength={255}
             onChange={(e) =>
               handleForm({ name: "message", value: e.target.value })
             }
           />
         ) : (
-          <ImgCrop rotationSlider aspectSlider>
-            <Upload
-              showUploadList={false}
-              accept="image/*"
-              beforeUpload={(file) => {
-                handleForm({ name: "image", value: file });
+          <UploadContainer>
+            <ImgCrop rotationSlider aspectSlider>
+              <Upload
+                style={{ width: "100%" }}
+                maxCount={1}
+                showUploadList={false}
+                accept="image/*"
+                beforeUpload={(file) => {
+                  handleForm({ name: "image", value: file });
 
-                getBase64(file).then((base64) => {
-                  setImagePreview(base64);
-                });
+                  getBase64(file).then((base64) => {
+                    setImagePreview(base64);
+                  });
 
-                return false;
-              }}
-              {...props}
-            >
-              {imagePreview ? (
-                <PreviewContainer>
-                  <img src={imagePreview} />
-                </PreviewContainer>
-              ) : (
-                <div>Click to Upload</div>
-              )}
-            </Upload>
-          </ImgCrop>
+                  return false;
+                }}
+              >
+                {imagePreview ? (
+                  <PreviewContainer>
+                    <img src={imagePreview} />
+                  </PreviewContainer>
+                ) : (
+                  <div className="upload-btn">
+                    Click to Upload <UploadOutlined />
+                  </div>
+                )}
+              </Upload>
+            </ImgCrop>
+          </UploadContainer>
         )}
       </Modal>
       <Header hasback hasprofile background="/images/default_header.jpg" />
