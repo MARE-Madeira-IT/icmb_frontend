@@ -10,33 +10,22 @@ jobs:
     steps:
     - name: Get the latest code
       uses: actions/checkout@v2.3.2
-    # - uses: actions/setup-node@master #only use for frontend
-    #   with:
-    #     node-version: 20
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
+    - uses: actions/setup-node@master
       with:
-        php-version: 8.3
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v4
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
-
-    # - name: Installing project dependencies #only use for frontend
-    #   run: npm install
-    # - name: Building the project #only use for frontend
-    #   run: npm run build
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+        node-version: 20
+    - name: create env file
+      run: |
+        touch .env
+        echo VITE_API_URL=${{ secrets.VITE_API_URL }} >> .env
+        echo VITE_PUSHER_APP_KEY=${{ secrets.VITE_PUSHER_APP_KEY }} >> .env
+    - name: Installing project dependencies
+      run: npm install
+    - name: Building the project
+      run: npm run build
     - name: Setup permissions
       run: |
         find . -type f -exec chmod 664 {} \;
         find . -type d -exec chmod 775 {} \;
-        chmod -R ug+rwx storage bootstrap/cache
     - name: 📂 Sync files
       uses: SamKirkland/web-deploy@v1
       with:
@@ -45,4 +34,4 @@ jobs:
         ssh-port: ${{ secrets.PORT }}
         private-ssh-key: ${{ secrets.SSHKEY }}
         destination-path: /var/www/icmb/frontend
-        rsync-options: -avzhp --chown=ruben.freitas:www-data --progress --delete-after --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore --exclude=.env --exclude=worker.log --exclude=storage/*
+        source-path: ./dist/ #only build folder
