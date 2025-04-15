@@ -1,0 +1,48 @@
+name: Deploy Site on push
+on:
+  push:
+    branches:
+      - production
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get the latest code
+      uses: actions/checkout@v2.3.2
+    # - uses: actions/setup-node@master #only use for frontend
+    #   with:
+    #     node-version: 20
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.3
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v4
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+
+    # - name: Installing project dependencies #only use for frontend
+    #   run: npm install
+    # - name: Building the project #only use for frontend
+    #   run: npm run build
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-progress
+    - name: Setup permissions
+      run: |
+        find . -type f -exec chmod 664 {} \;
+        find . -type d -exec chmod 775 {} \;
+        chmod -R ug+rwx storage bootstrap/cache
+    - name: 📂 Sync files
+      uses: SamKirkland/web-deploy@v1
+      with:
+        target-server: ${{ secrets.HOST }}
+        remote-user: ${{ secrets.USERNAME }}
+        ssh-port: ${{ secrets.PORT }}
+        private-ssh-key: ${{ secrets.SSHKEY }}
+        destination-path: /var/www/icmb/frontend
+        rsync-options: -avzhp --chown=ruben.freitas:www-data --progress --delete-after --exclude=.git* --exclude=.git/ --exclude=README.md --exclude=readme.md --exclude=.gitignore --exclude=.env --exclude=worker.log --exclude=storage/*
