@@ -72,7 +72,7 @@ function Header({
         {haslogo && <img className="" src="" alt="" />}
         {hasback && (
           <Link to={backroute}>
-            <img className="back" src="/icons/back.svg" alt="icmb logo" />
+            <img className="back" src="/assets/icons/back.svg" alt="icmb logo" />
           </Link>
         )}
         {hasprofile && (

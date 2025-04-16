@@ -106,7 +106,7 @@ function Speakers(props) {
             >
               <div className="content">
                 <img
-                  src="/icons/triangle.svg"
+                  src="/assets/icons/triangle.svg"
                   alt="triangle"
                   className="triangle"
                 />

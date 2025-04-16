@@ -56,7 +56,7 @@ function Settings(props) {
       </div>
 
       <button>
-        <img src="/icons/settings_edit.svg" alt="" />
+        <img src="/assets/icons/settings_edit.svg" alt="" />
       </button>
     </div>
   );

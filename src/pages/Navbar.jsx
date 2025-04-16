@@ -115,14 +115,14 @@ function Navbar(props) {
         )}
 
         <Item to="/" image="/icons/home_rotate.svg" className={handleClassname}>
-          <img className="icon" src="/icons/home.svg" alt="home" /> Home
+          <img className="icon" src="/assets/icons/home.svg" alt="home" /> Home
         </Item>
         <Item
           to="/program"
           image="/icons/program_rotate.svg"
           className={handleClassname}
         >
-          <img className="icon" src="/icons/program.svg" alt="schedule" />{" "}
+          <img className="icon" src="/assets/icons/program.svg" alt="schedule" />{" "}
           Program
         </Item>
         <Item
@@ -130,14 +130,14 @@ function Navbar(props) {
           image="/icons/chat_rotate.svg"
           className={handleClassname}
         >
-          <img className="icon" src="/icons/chat.svg" alt="chat" /> Chats
+          <img className="icon" src="/assets/icons/chat.svg" alt="chat" /> Chats
         </Item>
         <Item
           to="/support"
           image="/icons/support_rotate.svg"
           className={handleClassname}
         >
-          <img className="icon" src="/icons/support.svg" alt="support" />{" "}
+          <img className="icon" src="/assets/icons/support.svg" alt="support" />{" "}
           Support
         </Item>
       </Menu>

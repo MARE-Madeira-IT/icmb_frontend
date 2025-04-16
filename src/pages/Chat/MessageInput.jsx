@@ -9,7 +9,7 @@ const Container = styled.div`
     box-sizing: border-box;
     border-radius: 6px;
     margin-top: 20px;
-    
+
     input {
         border: 0px;
         flex: 1;
@@ -39,7 +39,7 @@ const Container = styled.div`
             object-fit: contain;
         }
     }
-    
+
 `;
 
 const MessageInput = (props) => {
@@ -68,7 +68,7 @@ const MessageInput = (props) => {
             <div className="input-group-append">
                 <button onClick={(e) => sendMessage(e)}
                     className="btn btn-primary"
-                    type="button"><img src="/icons/message.svg" alt="send" /></button>
+                    type="button"><img src="/assets/icons/message.svg" alt="send" /></button>
             </div>
         </Container>
     );

@@ -212,7 +212,7 @@ function Venue() {
           <div>
             <h2>Madeira Island</h2>
             <div className="country">
-              <img src="/icons/flag.svg" alt="flag" />
+              <img src="/assets/icons/flag.svg" alt="flag" />
               <p>Portugal</p>
             </div>
           </div>

@@ -120,7 +120,7 @@ function Resources(props) {
                 <div key={i} className="collapsable-flex-container">
                   <p className="title">{section.title}</p>
                   <button onClick={() => props.fetchResource(section)}>
-                    <img src="/icons/download.svg" alt="" />
+                    <img src="/assets/icons/download.svg" alt="" />
                     <span>Download</span>
                   </button>
                 </div>
