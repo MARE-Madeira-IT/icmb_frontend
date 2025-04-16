@@ -95,7 +95,7 @@ function Speakers(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/images/default_header.jpg" />
+      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
       <Content>
         <SpeakerList>
           {props.speakers.map((speaker, index) => (

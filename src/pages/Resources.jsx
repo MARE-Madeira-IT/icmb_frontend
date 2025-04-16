@@ -87,7 +87,7 @@ function Resources(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/images/default_header.jpg" />
+      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
 
       <Content>
         <h3>{text.title}</h3>

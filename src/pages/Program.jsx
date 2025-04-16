@@ -180,7 +180,7 @@ function Program(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/images/default_header.jpg">
+      <Header hasback hasprofile background="/assets/images/default_header.jpg">
         <HeaderContent>
           <div>
             <button
