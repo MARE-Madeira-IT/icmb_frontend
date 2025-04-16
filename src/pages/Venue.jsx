@@ -207,7 +207,7 @@ const data = {
 function Venue() {
   return (
     <Container>
-      <Header hasback hasprofile background="/images/madeira.jpg">
+      <Header hasback hasprofile background="/assets/images/madeira.jpg">
         <HeaderContent>
           <div>
             <h2>Madeira Island</h2>

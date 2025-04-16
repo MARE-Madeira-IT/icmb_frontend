@@ -266,7 +266,7 @@ function MessageBoard(props) {
           </UploadContainer>
         )}
       </Modal>
-      <Header hasback hasprofile background="/images/default_header.jpg" />
+      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
       <MasonryList
         // ListEmptyComponent={
         //   <View style={{ flexDirection: "row", gap: 20 }}>

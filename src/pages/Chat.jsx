@@ -91,7 +91,7 @@ function Chat(props) {
         height="150px"
         hasback
         hasprofile
-        background="/images/default_header.jpg"
+        background="/assets/images/default_header.jpg"
       />
       <Content style={{ height: "calc(100vh - 285px)" }}>
         <div>

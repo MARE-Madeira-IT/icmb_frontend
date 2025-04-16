@@ -80,13 +80,13 @@ const CustomBadge = styled(Badge)`
 function Homepage(props) {
   return (
     <Container>
-      <Header haslogo hasprofile background="/images/default_header.jpg" />
+      <Header haslogo hasprofile background="/assets/images/default_header.jpg" />
 
       <Content>
         <Row gutter={16}>
           <Col span={24}>
             <CustomBadge
-              background="/images/alert_board.jpg"
+              background="/assets/images/alert_board.jpg"
               count={props.notificationCounter}
             >
               <Link to="/alert-board">
@@ -98,13 +98,13 @@ function Homepage(props) {
 
           <Col span={12}>
             <Row gutter={16}>
-              <NavItem background="/images/networking_room.jpg" md={24} sm={24}>
+              <NavItem background="/assets/images/networking_room.jpg" md={24} sm={24}>
                 <Link to="/networking-room">
                   <h3>Networking Room</h3>
                   <p>Connect at ICMB</p>
                 </Link>
               </NavItem>
-              <NavItem background="/images/message_board.jpg" md={24} sm={24}>
+              <NavItem background="/assets/images/message_board.jpg" md={24} sm={24}>
                 <Link to="/message-board">
                   <h3>Message Board</h3>
                   <p>Share your experience</p>
@@ -113,7 +113,7 @@ function Homepage(props) {
             </Row>
           </Col>
           <NavItem
-            background="/images/community_vote.jpg"
+            background="/assets/images/community_vote.jpg"
             height={320}
             span={12}
           >
@@ -122,7 +122,7 @@ function Homepage(props) {
               <p>Evaluate posters and sessions</p>
             </Link>
           </NavItem>
-          <NavItem background="/images/venue.jpg" height={320} span={12}>
+          <NavItem background="/assets/images/venue.jpg" height={320} span={12}>
             <Link to="/venue">
               <h3>Venue</h3>
               <p>Get to know Madeira Island</p>
@@ -130,13 +130,13 @@ function Homepage(props) {
           </NavItem>
           <Col span={12}>
             <Row gutter={16}>
-              <NavItem background="/images/sponsors.jpg" md={24} sm={24}>
+              <NavItem background="/assets/images/sponsors.jpg" md={24} sm={24}>
                 <Link to="/sponsors">
                   <h3>Sponsors</h3>
                   <p>Entities that support us</p>
                 </Link>
               </NavItem>
-              <NavItem background="/images/speakers.jpg" md={24} sm={24}>
+              <NavItem background="/assets/images/speakers.jpg" md={24} sm={24}>
                 <Link to="/speakers">
                   <h3>Keynote Speakers</h3>
                   <p>Know the public speakers of ICMB</p>
@@ -144,7 +144,7 @@ function Homepage(props) {
               </NavItem>
             </Row>
           </Col>
-          <NavItem background="/images/resources_media.jpg" span={24}>
+          <NavItem background="/assets/images/resources_media.jpg" span={24}>
             <Link to="/resources">
               <h3>Resources & Media</h3>
               <p>Access to the digital content in the conference </p>

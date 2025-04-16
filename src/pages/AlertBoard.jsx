@@ -95,7 +95,7 @@ function AlertBoard(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/images/default_header.jpg" />
+      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
 
       <FilterContainer>
         {filters.map((filter, index) => (
