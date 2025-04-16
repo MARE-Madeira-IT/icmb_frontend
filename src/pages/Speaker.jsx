@@ -179,7 +179,7 @@ function Speaker(props) {
         <img className="background" src={props.speaker.image} alt="" />
 
         <Link to="/speakers" className="navbar">
-          <img className="back" src="/icons/back.svg" alt="icmb logo" />
+          <img className="back" src="/assets/icons/back.svg" alt="icmb logo" />
         </Link>
       </Header>
 

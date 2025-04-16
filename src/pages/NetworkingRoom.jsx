@@ -269,7 +269,7 @@ function NetworkingRoom(props) {
         <img className="background" src={props?.user?.image} alt="" />
 
         <Link to="/" className="navbar">
-          <img className="back" src="/icons/back.svg" alt="icmb logo" />
+          <img className="back" src="/assets/icons/back.svg" alt="icmb logo" />
         </Link>
       </Header>
       <HiddenPopconfirm>
@@ -295,7 +295,7 @@ function NetworkingRoom(props) {
                 </p>
               </div>
               <button onClick={() => setFormVisibility(true)}>
-                Edit <img src="/icons/edit.svg" alt="edit icon" />
+                Edit <img src="/assets/icons/edit.svg" alt="edit icon" />
               </button>
             </div>
             <h4>About</h4>
@@ -309,11 +309,11 @@ function NetworkingRoom(props) {
 
         <Title>
           <h2>Connect</h2>
-          <img src="/images/networkingroom/title1.png" alt="" />
+          <img src="/assets/images/networkingroom/title1.png" alt="" />
           <h2>with</h2>
           <h2>the</h2>
           <h2>community</h2>
-          <img src="/images/networkingroom/title2.png" alt="" />
+          <img src="/assets/images/networkingroom/title2.png" alt="" />
         </Title>
 
         {props.data.map((message) => (
@@ -330,7 +330,7 @@ function NetworkingRoom(props) {
                   className={message.connected ? "active" : ""}
                 >
                   <p>{message.connected ? "connected" : "connect"} </p>
-                  <img src="/icons/connect.svg" alt="" />
+                  <img src="/assets/icons/connect.svg" alt="" />
                 </button>
               </div>
             ) : (
