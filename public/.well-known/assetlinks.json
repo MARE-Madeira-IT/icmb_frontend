@@ -1,0 +1,12 @@
+[
+    {
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "pt.maremadeira.marinebioinvasions",
+        "sha256_cert_fingerprints": [
+          "17:2E:72:E1:68:B8:3D:BD:BD:F1:88:23:1B:42:50:01:88:EF:B1:AF:EF:88:AD:91:24:49:49:7A:F5:0F:37:4D"
+        ]
+      }
+    }
+  ]
