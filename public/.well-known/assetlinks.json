@@ -5,7 +5,8 @@
         "namespace": "android_app",
         "package_name": "pt.maremadeira.marinebioinvasions",
         "sha256_cert_fingerprints": [
-          "17:2E:72:E1:68:B8:3D:BD:BD:F1:88:23:1B:42:50:01:88:EF:B1:AF:EF:88:AD:91:24:49:49:7A:F5:0F:37:4D"
+          "17:2E:72:E1:68:B8:3D:BD:BD:F1:88:23:1B:42:50:01:88:EF:B1:AF:EF:88:AD:91:24:49:49:7A:F5:0F:37:4D",
+          "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"
         ]
       }
     }
