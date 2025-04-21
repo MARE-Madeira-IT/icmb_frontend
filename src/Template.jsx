@@ -17,11 +17,11 @@ const actionRoutes = [
   "session-voting",
 ];
 const actionImages = [
-  "/public/icons/message_board.svg",
-  "/public/icons/45connect.svg",
-  "/public/icons/submit.svg",
-  "/public/icons/share.svg",
-  "/public/icons/submit.svg",
+  "/public/assets/icons/message_board.svg",
+  "/public/assets/icons/45connect.svg",
+  "/public/assets/icons/submit.svg",
+  "/public/assets/icons/share.svg",
+  "/public/assets/icons/submit.svg",
 ];
 
 const Container = styled.div`

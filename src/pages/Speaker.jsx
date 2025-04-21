@@ -204,7 +204,7 @@ function Speaker(props) {
                     target="__blank"
                   >
                     <img
-                      src={"/icons/social_media/" + currentSocial + ".png"}
+                      src={"/assets/icons/social_media/" + currentSocial + ".png"}
                       alt={currentSocial}
                     />
                   </a>
@@ -232,8 +232,8 @@ function Speaker(props) {
                       onClick={() => props.updateSelfCalendar(session.id)}
                       src={
                         session.my_schedule
-                          ? "/icons/program_schedule.svg"
-                          : "/icons/program_add.svg"
+                          ? "/assets/icons/program_schedule.svg"
+                          : "/assets/icons/program_add.svg"
                       }
                       alt=""
                     />
