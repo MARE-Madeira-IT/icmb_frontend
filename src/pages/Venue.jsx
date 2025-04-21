@@ -105,7 +105,7 @@ const HeaderContent = styled.div`
 
 const data = {
   map: {
-    image: "/images/map.jpg",
+    image: "/assets/images/map.jpg",
     url: "https://maps.app.goo.gl/qSKmjfqtSsscc9sx7",
   },
   description:
@@ -120,22 +120,22 @@ const data = {
       viewmore: "https://visitmadeira.com/",
       activities: [
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
@@ -150,22 +150,22 @@ const data = {
       viewmore: "https://visitmadeira.com/",
       activities: [
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
@@ -180,22 +180,22 @@ const data = {
       viewmore: "https://visitmadeira.com/",
       activities: [
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
         {
-          image: "/images/header.jpg",
+          image: "/assets/images/header.jpg",
           location: "NORTH COAST",
           title: "Levada dos balcões",
         },
@@ -207,7 +207,7 @@ const data = {
 function Venue() {
   return (
     <Container>
-      <Header hasback hasprofile background="/assets/images/madeira.jpg">
+      <Header hasback hasprofile background="/assets/assets/images/madeira.jpg">
         <HeaderContent>
           <div>
             <h2>Madeira Island</h2>
