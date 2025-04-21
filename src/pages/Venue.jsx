@@ -207,7 +207,7 @@ const data = {
 function Venue() {
   return (
     <Container>
-      <Header hasback hasprofile background="/assets/assets/images/madeira.jpg">
+      <Header hasback hasprofile background="/assets/images/madeira.jpg">
         <HeaderContent>
           <div>
             <h2>Madeira Island</h2>
@@ -226,14 +226,14 @@ function Venue() {
 
         <p>{data.description}</p>
 
-        {data.sections.map((section) => (
-          <Section>
+        {data.sections.map((section, i) => (
+          <Section key={i}>
             <div className="title">
               <h2>{section.title}</h2>
             </div>
             <div className="activities">
-              {section.activities.map((activity) => (
-                <div className="activity">
+              {section.activities.map((activity, k) => (
+                <div className="activity" key={k}>
                   <img src={activity.image} alt="" />
                   <p>{activity.location}</p>
                   <h4>{activity.title}</h4>
