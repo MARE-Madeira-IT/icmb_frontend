@@ -167,8 +167,8 @@ function Program(props) {
               onClick={() => props.updateSelfCalendar(entry.id)}
               src={
                 entry.my_schedule
-                  ? "/icons/program_schedule.svg"
-                  : "/icons/program_add.svg"
+                  ? "/assets/icons/program_schedule.svg"
+                  : "/assets/icons/program_add.svg"
               }
               alt=""
             />

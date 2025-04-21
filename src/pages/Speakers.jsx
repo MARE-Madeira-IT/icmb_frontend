@@ -113,8 +113,8 @@ function Speakers(props) {
                 <img
                   src={
                     index % 2 == 0
-                      ? "/icons/speaker_background.svg"
-                      : "/icons/speaker_background_2.svg"
+                      ? "/assets/icons/speaker_background.svg"
+                      : "/assets/icons/speaker_background_2.svg"
                   }
                   alt="asbtract elements"
                   className="background"
