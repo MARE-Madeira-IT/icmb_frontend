@@ -76,11 +76,11 @@ export const router = createBrowserRouter([
         element: <Voting />,
       },
       {
-        path: "/poster-voting/:id",
+        path: "/posters/:id",
         element: <PosterForm />,
       },
       {
-        path: "/session-voting/:id",
+        path: "/sessions/:id",
         element: <SessionForm />,
       },
       {
