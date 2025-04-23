@@ -11,10 +11,10 @@ import { countNotifications } from "./redux/redux-modules/notification/actions";
 
 const actionRoutes = [
   "message-board",
-  "speaker",
+  "speakers",
   "poster-voting",
   "networking-room",
-  "session-voting",
+  "sessions",
 ];
 const actionImages = [
   "/assets/icons/message_board.svg",
