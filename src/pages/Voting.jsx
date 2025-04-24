@@ -28,8 +28,6 @@ function Voting() {
     );
   }
 
-  alert(`IS MOBILE: ${isMobile()}`);
-
   return (
     <QrReader
       className="teste"
@@ -39,7 +37,10 @@ function Voting() {
         width: "100vw",
         objectFit: "cover",
       }}
-      facingMode="rear"
+      constraints={{
+        audio: false,
+        video: { facingMode: isMobile() ? "environment" : "user" },
+      }}
       onError={onScanFail}
       onScan={onScanSuccess}
     />
