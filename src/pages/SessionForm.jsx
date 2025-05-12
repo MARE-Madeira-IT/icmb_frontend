@@ -87,7 +87,6 @@ function SessionForm(props) {
 const mapStateToProps = (state) => {
   return {
     questions: state.question.data,
-    isAuthenticated: state.auth.isAuthenticated,
     hasClickedAction: state.application.hasClickedAction,
   };
 };

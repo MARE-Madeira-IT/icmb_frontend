@@ -204,7 +204,9 @@ function Speaker(props) {
                     target="__blank"
                   >
                     <img
-                      src={"/assets/icons/social_media/" + currentSocial + ".png"}
+                      src={
+                        "/assets/icons/social_media/" + currentSocial + ".png"
+                      }
                       alt={currentSocial}
                     />
                   </a>
@@ -249,7 +251,6 @@ function Speaker(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
     hasClickedAction: state.application.hasClickedAction,
     speaker: state.speaker.current,
   };
