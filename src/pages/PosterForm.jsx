@@ -87,8 +87,7 @@ function PosterForm(props) {
 const mapStateToProps = (state) => {
   return {
     questions: state.question.data,
-    isAuthenticated: state.auth.isAuthenticated,
-    hasClickedAction: state.application.hasClickedAction,
+     hasClickedAction: state.application.hasClickedAction,
   };
 };
 

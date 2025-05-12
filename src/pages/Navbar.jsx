@@ -99,8 +99,6 @@ const Action = styled.div`
 `;
 
 function Navbar(props) {
-  const { isAuthenticated } = props;
-
   const handleClassname = ({ isActive, isPending }) => {
     return isPending ? "pending" : isActive ? "active" : "not-active";
   };
@@ -114,7 +112,11 @@ function Navbar(props) {
           </Action>
         )}
 
-        <Item to="/" image="/assets/icons/home_rotate.svg" className={handleClassname}>
+        <Item
+          to="/"
+          image="/assets/icons/home_rotate.svg"
+          className={handleClassname}
+        >
           <img className="icon" src="/assets/icons/home.svg" alt="home" /> Home
         </Item>
         <Item
@@ -122,7 +124,11 @@ function Navbar(props) {
           image="/assets/icons/program_rotate.svg"
           className={handleClassname}
         >
-          <img className="icon" src="/assets/icons/program.svg" alt="schedule" />{" "}
+          <img
+            className="icon"
+            src="/assets/icons/program.svg"
+            alt="schedule"
+          />{" "}
           Program
         </Item>
         <Item
@@ -147,7 +153,6 @@ function Navbar(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
     hasAction: state.application.hasAction,
   };
 };
