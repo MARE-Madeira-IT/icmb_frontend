@@ -13,20 +13,22 @@ import question from "./redux-modules/question";
 import form from "./redux-modules/form";
 import faq from "./redux-modules/faq";
 import notification from "./redux-modules/notification";
+import post from "./redux-modules/post";
 
 export const reducer = combineReducers({
-    auth,
-    application,
-    message,
-    chat,
-    calendar,
-    networking,
-    user,
-    sponsor,
-    speaker,
-    resource,
-    question,
-    form,
-    faq,
-    notification
+  auth,
+  application,
+  message,
+  chat,
+  calendar,
+  networking,
+  user,
+  sponsor,
+  speaker,
+  resource,
+  question,
+  form,
+  faq,
+  notification,
+  post,
 });

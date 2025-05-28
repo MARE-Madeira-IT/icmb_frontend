@@ -63,10 +63,10 @@ function SessionForm(props) {
 
   return (
     <Container>
-      <Header hasback background="/images/default_header.jpg" />
+      <Header hasback background="/assets/images/default_header.jpg" />
       <Content>
         <h3>Evaluate this poster based on the following aspects:</h3>
-        {props.questions.map((question) => (
+        {props?.questions?.map((question) => (
           <div style={{ padding: "0px 20px 0px 0px" }} key={question.id}>
             <p>{question.content}</p>
             <Slider
@@ -87,7 +87,6 @@ function SessionForm(props) {
 const mapStateToProps = (state) => {
   return {
     questions: state.question.data,
-    isAuthenticated: state.auth.isAuthenticated,
     hasClickedAction: state.application.hasClickedAction,
   };
 };

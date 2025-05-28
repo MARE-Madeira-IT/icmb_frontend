@@ -65,3 +65,4 @@ export function download(response, filename) {
     document.body.appendChild(link);
     link.click();
 };
+

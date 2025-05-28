@@ -95,11 +95,12 @@ function AlertBoard(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/images/default_header.jpg" />
+      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
 
       <FilterContainer>
         {filters.map((filter, index) => (
           <p
+            key={index}
             onClick={() => setCurrentFilter(index)}
             className={currentFilter == index && "active"}
           >
@@ -108,10 +109,10 @@ function AlertBoard(props) {
         ))}
       </FilterContainer>
       <Content>
-        {props.data.map((notification) => {
+        {props.data.map((notification, i) => {
           if (notification.type == filters[currentFilter] || currentFilter == 0)
             return (
-              <NotificationContent>
+              <NotificationContent key={i}>
                 <div>
                   <Badge dot={!notification.pivot.seen}>
                     <h4 style={{ marginRight: "7px" }}>{notification.title}</h4>

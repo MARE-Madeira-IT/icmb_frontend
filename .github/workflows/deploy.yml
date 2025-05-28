@@ -1,0 +1,37 @@
+name: Deploy Site on push
+on:
+  push:
+    branches:
+      - production
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get the latest code
+      uses: actions/checkout@v2.3.2
+    - uses: actions/setup-node@master
+      with:
+        node-version: 20
+    - name: create env file
+      run: |
+        touch .env
+        echo VITE_API_URL=${{ secrets.VITE_API_URL }} >> .env
+        echo VITE_PUSHER_APP_KEY=${{ secrets.VITE_PUSHER_APP_KEY }} >> .env
+    - name: Installing project dependencies
+      run: npm install
+    - name: Building the project
+      run: npm run build
+    - name: Setup permissions
+      run: |
+        find . -type f -exec chmod 664 {} \;
+        find . -type d -exec chmod 775 {} \;
+    - name: 📂 Sync files
+      uses: SamKirkland/web-deploy@v1
+      with:
+        target-server: ${{ secrets.HOST }}
+        remote-user: ${{ secrets.USERNAME }}
+        ssh-port: ${{ secrets.PORT }}
+        private-ssh-key: ${{ secrets.SSHKEY }}
+        destination-path: /var/www/icmb/frontend
+        source-path: ./dist/ #only build folder

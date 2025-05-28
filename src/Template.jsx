@@ -11,17 +11,17 @@ import { countNotifications } from "./redux/redux-modules/notification/actions";
 
 const actionRoutes = [
   "message-board",
-  "speaker",
+  "speakers",
   "poster-voting",
   "networking-room",
-  "session-voting",
+  "sessions",
 ];
 const actionImages = [
-  "/public/icons/message_board.svg",
-  "/public/icons/45connect.svg",
-  "/public/icons/submit.svg",
-  "/public/icons/share.svg",
-  "/public/icons/submit.svg",
+  "/assets/icons/message_board.svg",
+  "/assets/icons/45connect.svg",
+  "/assets/icons/submit.svg",
+  "/assets/icons/share.svg",
+  "/assets/icons/submit.svg",
 ];
 
 const Container = styled.div`

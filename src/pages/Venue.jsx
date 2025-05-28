@@ -117,7 +117,7 @@ const HeaderContent = styled.div`
 
 const data = {
   map: {
-    image: "/images/map.jpg",
+    image: "/assets/images/map.jpg",
     url: "https://maps.app.goo.gl/qSKmjfqtSsscc9sx7",
   },
   description:
@@ -362,12 +362,12 @@ const data = {
 function Venue() {
   return (
     <Container>
-      <Header hasback hasprofile background="/images/madeira.jpg">
+      <Header hasback hasprofile background="/assets/images/madeira.jpg">
         <HeaderContent>
           <div>
             <h2>Madeira Island</h2>
             <div className="country">
-              <img src="/icons/flag.svg" alt="flag" />
+              <img src="/assets/icons/flag.svg" alt="flag" />
               <p>Portugal</p>
             </div>
           </div>
@@ -381,8 +381,8 @@ function Venue() {
 
         <p>{data.description}</p>
 
-        {data.sections.map((section) => (
-          <Section>
+        {data.sections.map((section, i) => (
+          <Section key={i}>
             <div className="title">
               <h2>{section.title}</h2>
             </div>

@@ -99,8 +99,6 @@ const Action = styled.div`
 `;
 
 function Navbar(props) {
-  const { isAuthenticated } = props;
-
   const handleClassname = ({ isActive, isPending }) => {
     return isPending ? "pending" : isActive ? "active" : "not-active";
   };
@@ -114,30 +112,38 @@ function Navbar(props) {
           </Action>
         )}
 
-        <Item to="/" image="/icons/home_rotate.svg" className={handleClassname}>
-          <img className="icon" src="/icons/home.svg" alt="home" /> Home
+        <Item
+          to="/"
+          image="/assets/icons/home_rotate.svg"
+          className={handleClassname}
+        >
+          <img className="icon" src="/assets/icons/home.svg" alt="home" /> Home
         </Item>
         <Item
           to="/program"
-          image="/icons/program_rotate.svg"
+          image="/assets/icons/program_rotate.svg"
           className={handleClassname}
         >
-          <img className="icon" src="/icons/program.svg" alt="schedule" />{" "}
+          <img
+            className="icon"
+            src="/assets/icons/program.svg"
+            alt="schedule"
+          />{" "}
           Program
         </Item>
         <Item
           to="/chats"
-          image="/icons/chat_rotate.svg"
+          image="/assets/icons/chat_rotate.svg"
           className={handleClassname}
         >
-          <img className="icon" src="/icons/chat.svg" alt="chat" /> Chats
+          <img className="icon" src="/assets/icons/chat.svg" alt="chat" /> Chats
         </Item>
         <Item
           to="/support"
-          image="/icons/support_rotate.svg"
+          image="/assets/icons/support_rotate.svg"
           className={handleClassname}
         >
-          <img className="icon" src="/icons/support.svg" alt="support" />{" "}
+          <img className="icon" src="/assets/icons/support.svg" alt="support" />{" "}
           Support
         </Item>
       </Menu>
@@ -147,7 +153,6 @@ function Navbar(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
     hasAction: state.application.hasAction,
   };
 };

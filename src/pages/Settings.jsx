@@ -56,7 +56,7 @@ function Settings(props) {
       </div>
 
       <button>
-        <img src="/icons/settings_edit.svg" alt="" />
+        <img src="/assets/icons/settings_edit.svg" alt="" />
       </button>
     </div>
   );
@@ -86,7 +86,7 @@ function Settings(props) {
         visible={formVisibility}
         setVisible={setFormVisibility}
       />
-      <Header hasback hasprofile background="/images/default_header.jpg" />
+      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
       <Content>
         <h3>Personal Details</h3>
         <p>

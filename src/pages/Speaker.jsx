@@ -179,7 +179,7 @@ function Speaker(props) {
         <img className="background" src={props.speaker.image} alt="" />
 
         <Link to="/speakers" className="navbar">
-          <img className="back" src="/icons/back.svg" alt="icmb logo" />
+          <img className="back" src="/assets/icons/back.svg" alt="icmb logo" />
         </Link>
       </Header>
 
@@ -204,7 +204,9 @@ function Speaker(props) {
                     target="__blank"
                   >
                     <img
-                      src={"/icons/social_media/" + currentSocial + ".png"}
+                      src={
+                        "/assets/icons/social_media/" + currentSocial + ".png"
+                      }
                       alt={currentSocial}
                     />
                   </a>
@@ -232,8 +234,8 @@ function Speaker(props) {
                       onClick={() => props.updateSelfCalendar(session.id)}
                       src={
                         session.my_schedule
-                          ? "/icons/program_schedule.svg"
-                          : "/icons/program_add.svg"
+                          ? "/assets/icons/program_schedule.svg"
+                          : "/assets/icons/program_add.svg"
                       }
                       alt=""
                     />
@@ -249,7 +251,6 @@ function Speaker(props) {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
     hasClickedAction: state.application.hasClickedAction,
     speaker: state.speaker.current,
   };

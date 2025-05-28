@@ -1,13 +1,13 @@
+import { Collapse } from "antd";
 import React, { useEffect } from "react";
-import { Container, Content } from "../helper";
-import Header from "../common/Header";
-import styled from "styled-components";
 import { connect } from "react-redux";
+import styled from "styled-components";
+import Header from "../common/Header";
+import { Container, Content } from "../helper";
 import {
   fetchResource,
   fetchResources,
 } from "../redux/redux-modules/resource/actions";
-import { Collapse } from "antd";
 
 const text = {
   title: "Downloadable media & resources",
@@ -87,7 +87,7 @@ function Resources(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/images/default_header.jpg" />
+      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
 
       <Content>
         <h3>{text.title}</h3>
@@ -95,8 +95,13 @@ function Resources(props) {
 
         <br />
 
-        {Object.entries(props.data).map((section) => (
-          <Section expandIcon={() => <div />} collapsible="header" ghost>
+        {Object.entries(props.data).map((section, i) => (
+          <Section
+            key={i}
+            expandIcon={() => <div />}
+            collapsible="header"
+            ghost
+          >
             <Collapse.Panel
               header={
                 <div className="header-flex">
@@ -111,11 +116,11 @@ function Resources(props) {
               }
               key={section[0]}
             >
-              {section[1].map((section) => (
-                <div className="collapsable-flex-container">
+              {section[1].map((section, i) => (
+                <div key={i} className="collapsable-flex-container">
                   <p className="title">{section.title}</p>
                   <button onClick={() => props.fetchResource(section)}>
-                    <img src="/icons/download.svg" alt="" />
+                    <img src="/assets/icons/download.svg" alt="" />
                     <span>Download</span>
                   </button>
                 </div>
