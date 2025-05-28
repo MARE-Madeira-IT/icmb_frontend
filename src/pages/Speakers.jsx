@@ -105,7 +105,11 @@ function Speakers(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
+      <Header
+        hasback
+        hasprofile
+        background="/assets/images/default_header.jpg"
+      />
       <Content>
         <SpeakerList>
           {props.speakers.map((speaker, index) => (
@@ -117,7 +121,7 @@ function Speakers(props) {
               <div className="content">
                 <div className="speaker_photo">
                   <img
-                    src="/icons/triangle.svg"
+                    src="/assets/icons/triangle.svg"
                     alt="triangle"
                     className="triangle"
                   />
@@ -136,7 +140,9 @@ function Speakers(props) {
                 </div>
 
                 <img
-                  src={"/icons/speaker_background_" + speaker.id + ".svg"}
+                  src={
+                    "/assets/icons/speaker_background_" + speaker.id + ".svg"
+                  }
                   alt="asbtract elements"
                   className="background"
                 />
