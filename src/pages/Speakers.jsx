@@ -22,18 +22,37 @@ const Speaker = styled(Link)`
   .content {
     height: 100%;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
     display: flex;
-    align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
     position: relative;
     justify-content: ${(props) => (props.iseven ? "start" : "end")};
 
-    .speaker {
-      height: calc(100% + 30px);
-      filter: grayscale(1);
-      margin: ${(props) =>
-        props.iseven ? "-30px 0px 0px 30px" : "-30px 30px 0px 0px"};
-      order: ${(props) => (props.iseven ? 1 : 2)};
+    .speaker_photo {
+      position: relative;
+      order: ${(props) => (props.iseven ? 1 : 3)};
+
+      .triangle {
+        z-index: -1;
+        position: absolute;
+        left: ${(props) => (props.iseven ? "0px" : "calc(100% - 102px)")};
+        top: 50%;
+        transform: ${(props) =>
+          props.iseven
+            ? "translate(0, -50%)"
+            : "translate(0, -50%) scaleX(-1)"};
+        height: 100px;
+        object-fit: cover;
+      }
+
+      .speaker {
+        height: 180px;
+        filter: grayscale(1);
+        margin: ${(props) =>
+          props.iseven ? "-30px 0px 0px 25px" : "-30px 25px 0px 0px"};
+      }
     }
 
     .info {
@@ -41,7 +60,10 @@ const Speaker = styled(Link)`
       flex-direction: column;
       gap: 5px;
       min-height: 120px;
-      order: ${(props) => (props.iseven ? 2 : 1)};
+      order: 2;
+      padding: 15px 0px;
+      box-sizing: border-box;
+      flex: 1;
 
       h3 {
         font-size: clamp(16px, 3vw, 18px);
@@ -66,24 +88,12 @@ const Speaker = styled(Link)`
       }
     }
 
-    .triangle {
-      z-index: -1;
-      position: absolute;
-      left: ${(props) => (props.iseven ? "-2px" : "calc(75% + 2px)")};
-      top: 50%;
-      transform: ${(props) =>
-        props.iseven ? "translate(0, -50%)" : "translate(0, -50%) scaleX(-1)"};
-      width: 25%;
-      max-height: 80%;
-    }
-
     .background {
-      z-index: -1;
-      position: absolute;
-      right: ${(props) => (props.iseven ? 0 : "70%")};
       bottom: 0;
       width: 30%;
-      max-height: 90%;
+      max-height: 140px;
+      order: ${(props) => (props.iseven ? 3 : 1)};
+      margin-top: auto;
     }
   }
 `;
@@ -105,31 +115,31 @@ function Speakers(props) {
               key={speaker.id}
             >
               <div className="content">
-                <img
-                  src="/icons/triangle.svg"
-                  alt="triangle"
-                  className="triangle"
-                />
-                <img
-                  src={
-                    index % 2 == 0
-                      ? "/icons/speaker_background.svg"
-                      : "/icons/speaker_background_2.svg"
-                  }
-                  alt="asbtract elements"
-                  className="background"
-                />
-                <img
-                  src={speaker.secundary_image}
-                  alt="speaker photo"
-                  className="speaker"
-                />
+                <div className="speaker_photo">
+                  <img
+                    src="/icons/triangle.svg"
+                    alt="triangle"
+                    className="triangle"
+                  />
+                  <img
+                    src={speaker.secundary_image}
+                    alt="speaker photo"
+                    className="speaker"
+                  />
+                </div>
+
                 <div className="info">
                   <h3>{speaker.name}</h3>
                   <h4>{speaker.country}</h4>
 
                   <p>{speaker.institution}</p>
                 </div>
+
+                <img
+                  src={"/icons/speaker_background_" + speaker.id + ".svg"}
+                  alt="asbtract elements"
+                  className="background"
+                />
               </div>
             </Speaker>
           ))}

@@ -97,7 +97,7 @@ function Login(props) {
         localStorage.setItem("token", token);
         setAuthorizationToken(token);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => warning(err.response.data.error));
   };
 
   useEffect(() => {
@@ -106,8 +106,16 @@ function Login(props) {
     }
   }, [props.isAuthenticated]);
 
+  const warning = (message) => {
+    messageApi.open({
+      type: "warning",
+      content: message,
+    });
+  };
+
   return (
     <Container>
+      {contextHolder}
       <Header height="350px" background="/images/default_header.jpg" />
       <CustomContent>
         <h2>Login to proceed</h2>
