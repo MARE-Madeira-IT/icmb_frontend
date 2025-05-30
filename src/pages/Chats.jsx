@@ -91,7 +91,11 @@ function Chats(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
+      <Header
+        hasback
+        hasprofile
+        background="/assets/images/default_header.jpg"
+      />
 
       <div className="row justify-content-center">
         <div className="col-md-8">

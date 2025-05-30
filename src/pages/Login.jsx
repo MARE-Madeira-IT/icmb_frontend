@@ -116,7 +116,7 @@ function Login(props) {
   return (
     <Container>
       {contextHolder}
-      <Header height="350px" background="/images/default_header.jpg" />
+      <Header height="350px" background="/assets/images/default_header.jpg" />
       <CustomContent>
         <h2>Login to proceed</h2>
 

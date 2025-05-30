@@ -199,7 +199,8 @@ function NetworkingRoom(props) {
       } else {
         props.setNotifications({
           notifications: { error: null },
-          title: "Set your user about first",
+          title:
+            "Please complete your profile before sharing with the community.",
           type: "error",
         });
       }

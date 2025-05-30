@@ -41,15 +41,15 @@ const Section = styled.div`
         position: absolute;
 
         width: 70%;
-        opacity: 0.2;
+        opacity: 0.1;
       }
 
       .first {
-        top: -15px;
+        top: -20px;
       }
 
       .last {
-        bottom: -15px;
+        bottom: -20px;
       }
     }
   }
@@ -62,7 +62,11 @@ function Sponsors(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
+      <Header
+        hasback
+        hasprofile
+        background="/assets/images/default_header.jpg"
+      />
 
       <Content>
         <h3>Thank you to our sponsors</h3>
