@@ -81,12 +81,7 @@ const NotificationContent = styled.div`
 `;
 
 function AlertBoard(props) {
-  const [filters, setFilters] = useState([
-    "all",
-    "connection",
-    "system",
-    "reminder",
-  ]);
+  const [filters] = useState(["all", "connection", "system", "reminder"]);
   const [currentFilter, setCurrentFilter] = useState(0);
 
   useEffect(() => {
@@ -95,7 +90,11 @@ function AlertBoard(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
+      <Header
+        hasback
+        hasprofile
+        background="/assets/images/default_header.jpg"
+      />
 
       <FilterContainer>
         {filters.map((filter, index) => (
