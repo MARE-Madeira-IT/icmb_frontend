@@ -65,9 +65,10 @@ function Chat(props) {
       window.Echo.private(webSocketChannel).listen(
         "MessageCreated",
         async (e) => {
-          if (e.message.user.id != props.currentUser.id) {
+          if (e.message.user.id !== props.currentUser.id) {
             props.addMessage(e);
           }
+          props.markAsRead({ chat_id: id });
         }
       );
     }
@@ -76,6 +77,7 @@ function Chat(props) {
       window.Echo.leave(webSocketChannel);
     };
   }, [props.currentChat.id]);
+  
 
   useEffect(() => {
     props.fetchChat(id);

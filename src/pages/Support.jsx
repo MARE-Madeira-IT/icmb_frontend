@@ -28,7 +28,7 @@ const FaqContainer = styled.section`
   }
 
   .ant-collapse-item-active {
-    background-color: ${({ theme }) => theme.secundary};
+    background-color: ${({ theme }) => theme.lightGradient};
 
     .ant-collapse-header {
       border-bottom: 0px;
@@ -47,35 +47,40 @@ const FaqContainer = styled.section`
   }
 `;
 
-const text = (
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.
-    Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis
-    ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam
-    quis imperdiet augue. Vestibulum auctor ornare leo.
-  </p>
-);
+const ContactContainer = styled.section`
+  background-color: ${({ theme }) => theme.lightGradient};
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
+  gap: 30px;
+  border-radius: 8px;
 
-const items = [
-  {
-    key: "1",
-    label: "Lorem ipsum dolor sit amet?",
-    children: text,
-    showArrow: false,
-  },
-  {
-    key: "2",
-    label: "This is panel header 2",
-    children: text,
-    showArrow: false,
-  },
-  {
-    key: "3",
-    label: "This is panel header 3",
-    children: text,
-    showArrow: false,
-  },
-];
+  .image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h4 {
+      margin: 10px 0px 0px 0px;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  p {
+    margin: 0;
+    text-align: left;
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-align: center;
+    }
+  }
+`;
 
 function Support(props) {
   useEffect(() => {
@@ -84,7 +89,11 @@ function Support(props) {
 
   return (
     <Container>
-      <Header hasback hasprofile background="/assets/images/default_header.jpg" />
+      <Header
+        hasback
+        hasprofile
+        background="/assets/images/default_header.jpg"
+      />
 
       <Content>
         <h3>Contact us</h3>
@@ -92,6 +101,20 @@ function Support(props) {
           Don't hesitate to contact us wether you have a suggestion on our
           improvement, a complain to discuss or an issue to solve.
         </p>
+
+        <ContactContainer>
+          <div className="image">
+            <img src="/assets/icons/email.svg" alt="email envelope" />
+            <h4>Email us</h4>
+          </div>
+
+          <p>
+            Our team is online <br />
+            <a href="mailto:support@marinebioinvasions.info">
+              support@marinebioinvasions.info
+            </a>
+          </p>
+        </ContactContainer>
 
         <h3>Frequently Asked Questions</h3>
         <FaqContainer>
