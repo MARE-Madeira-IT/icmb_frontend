@@ -387,8 +387,13 @@ function Venue() {
               <h2>{section.title}</h2>
             </div>
             <div className="activities">
-              {section.activities.map((activity) => (
-                <Link className="activity" to={activity.url} target="__blank">
+              {section.activities.map((activity, i) => (
+                <Link
+                  className="activity"
+                  to={activity.url}
+                  key={i}
+                  target="__blank"
+                >
                   <div className="copyright">
                     <img src={activity.image} alt={activity.title} />
                     <span>
